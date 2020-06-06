@@ -38,7 +38,7 @@ Another study done by [Baliga, et al. (2009)](https://t.umblr.com/redirect?z=htt
 
 One last interesting hypothesis is made by [Salahuddin, et al. (2016)](https://t.umblr.com/redirect?z=https%3A%2F%2Fwww.sciencedirect.com%2Fscience%2Farticle%2Fabs%2Fpii%2FS1364032116300351&t=MWE1OTM2OTcyMmRlZTdkNDViOTUxZGQ4MWFjYzk5Y2UzY2FjN2FiYyxkbnF3MWJIcA%3D%3D&b=t%3AgDEbafbOiheENGoAz6-G3w&p=https%3A%2F%2Fjunda-ia.tumblr.com%2Fpost%2F617662554512179200&m=1). In their paper, they mentioned that although positive correlation between CO2 consumption and internet usage exists, it is weak as there are more direct and stronger factor that has an impact on CO2 emissions.
 
-Now that we have enough information on previous research done on the tpoic, we can have a revised question.
+Now that we have enough information on previous research done on the topic, we can have a revised question.
 
 > "Is there an association between CO2 emission produced by countries when economic growth and rate of oil consumption is taken into account"
 
