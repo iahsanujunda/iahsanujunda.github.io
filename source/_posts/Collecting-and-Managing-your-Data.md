@@ -16,7 +16,7 @@ We have actually put a makeshift code book by putting together the definition of
 
 ![gapminder co2 total](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_co2_emission.png)
 
-![gapmnder internet user rate](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_internetuse_rate.png)
+![gapminder internet user rate](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_internetuse_rate.png)
 
 ![gapminder total population](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_total_population.png)
 
