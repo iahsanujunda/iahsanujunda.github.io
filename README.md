@@ -1,4 +1,4 @@
-# HEXA-powered Blog
+# HEXO-powered Blog
 
 this repository accompanies the blog that is hosted on iahsanujunda.github.io. The main blogging engine is powered by [hexo]('hexo.io'). It is a light weight blogging engine that doesn't need a relational database to store the data, it uses parsing text files instead.  Due to how hexo works and how github pages has to be managed, we have to put all blog files that has been built on `master` branch, otherwise github pages won't load. The 'code side' of the repo is actually stored on separate branch called `hexo-source`. 
 
