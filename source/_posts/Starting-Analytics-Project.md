@@ -4,7 +4,7 @@ date: 2020-06-06 19:05:25
 tags:
 ---
 
-Making a good question is important step of any analytics project, and unfortunately, there is a good and bad question when it comes to analytics. We are going to identify good ones from bad ones as we go along. I start this project by creating a code book for the dataset that I'm interested in, it will start from a single variable and it would be normal for the number of variables we have in the notebook to increase and decrease as we went through all analytics phases.
+Making a good question is important step of any analytics project, and unfortunately, a concept of bad question exists when it comes to analytics. We are going to identify good ones from bad ones as we go along. I start this project by creating a code book for the dataset that we are working on in this project, it will start from a single variable and it _will_ evolve as we went through all analytics phases.
 
 <!-- more -->
 
