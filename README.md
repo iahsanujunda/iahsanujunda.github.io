@@ -4,14 +4,14 @@
 <img src="./themes/hermes/source/favicon.png" width="60%" alt="jund-clothing" />
 </p>
 
-This is the accompanying repository of iahsanujunda.github.io, a personal blog powered by [hexo](https://www.hexo.io). Hexo is a light weight blogging engine that only depends on parsing text files.
+This is the accompanying repository of [iahsanujunda.github.io](iahsanujunda.github.io), a personal blog powered by [hexo](https://www.hexo.io). Hexo is a light-weight blogging engine that only depends on parsing text files.
 
 ## Features
 
-- Markdown parsing
-- Tags and Categories
-- Customizable themes
-- Blazing fast loading
+- Markdown parsing 🌐
+- Tags and Categories #️⃣
+- Customizable themes ⚙️
+- Blazing fast loading ⚡
 
 ## Setup
 
