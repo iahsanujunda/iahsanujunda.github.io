@@ -10,6 +10,7 @@ This is the accompanying repository of iahsanujunda.github.io, a personal blog p
 
 - Markdown parsing
 - Tags and Categories
+- Customizable themes
 - Blazing fast loading
 
 ## Setup
@@ -64,3 +65,7 @@ We can also deploy the content of `public/` directory manually to any hosting se
 
 Using CI tools, we simply do `git push -u origin hexo-source` to the remote repository. If we have configured CI tools to integrate with this repository, the CI will build the hexo site and deployed it to specified hosting service. For this site, we have specified github pages as the hosting service according to [this guide](https://hexo.io/docs/github-pages) from hexo. For github pages in particular, we use `hexo-source` as the default branch because master is the branch that github pages will host the site on. Therefore, CI tools will put build package into master branch.
 
+## Technologies
+
+- [Hexo](https://hexo.io/) - Node.js lightweight framework 
+- [Github Pages](https://pages.github.com/) - Host your project code and website in one place
