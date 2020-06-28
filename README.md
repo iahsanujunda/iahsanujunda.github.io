@@ -63,7 +63,7 @@ We can also deploy the content of `public/` directory manually to any hosting se
 
 ### 2. CI Build
 
-Using CI tools, we simply do `git push -u origin hexo-source` to the remote repository. If we have configured CI tools to integrate with this repository, it will build the hexo site and deployed it to specified hosting service. For this site, we have specified github pages as the hosting service according to [this guide](https://hexo.io/docs/github-pages) from hexo. For github pages in particular, we use `hexo-source` as the default branch because master is the branch that github pages will host the site on. Therefore, CI tools will put build package into master branch.
+Using CI tools, we simply do `git push -u origin hexo-source` to the remote repository. If we have configured CI tools to integrate with this repository, it will build the hexo site and deployed it to specified hosting service. For this site, we have specified github pages as the hosting service according to [this guide](https://hexo.io/docs/github-pages) from hexo. Github pages need master branch to host the site, so if we want to host the codes and site at the same repo, we need to make use of another branch as default branch, in this case we use `hexo-source`. We can, of course, manually manage both `master` and `hexo-source` and push only appropriate content to each, but it is easy to make mistake in overwriting branches, so we offload this risk to the CI tools.
 
 ## Technologies
 
