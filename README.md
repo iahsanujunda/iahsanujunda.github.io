@@ -1,7 +1,7 @@
 # iahsanujunda.github.io
 
 <p align="center">
-<img src="./themes/hermes/source/favicon.png" width="60%" alt="jund-clothing" />
+<img src="./themes/hermes/source/favicon.png" height="30%" width="30%" alt="jund-clothing" />
 </p>
 
 This is the accompanying repository of [iahsanujunda.github.io](https://iahsanujunda.github.io), a personal blog powered by [hexo](https://www.hexo.io). Hexo is a light-weight blogging engine that only depends on parsing text files.
@@ -63,7 +63,7 @@ We can also deploy the content of `public/` directory manually to any hosting se
 
 ### 2. CI Build
 
-Using CI tools, we simply do `git push -u origin hexo-source` to the remote repository. If we have configured CI tools to integrate with this repository, the CI will build the hexo site and deployed it to specified hosting service. For this site, we have specified github pages as the hosting service according to [this guide](https://hexo.io/docs/github-pages) from hexo. For github pages in particular, we use `hexo-source` as the default branch because master is the branch that github pages will host the site on. Therefore, CI tools will put build package into master branch.
+Using CI tools, we simply do `git push -u origin hexo-source` to the remote repository. If we have configured CI tools to integrate with this repository, it will build the hexo site and deployed it to specified hosting service. For this site, we have specified github pages as the hosting service according to [this guide](https://hexo.io/docs/github-pages) from hexo. For github pages in particular, we use `hexo-source` as the default branch because master is the branch that github pages will host the site on. Therefore, CI tools will put build package into master branch.
 
 ## Technologies
 
