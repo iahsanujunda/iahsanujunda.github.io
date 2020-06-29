@@ -14,3 +14,7 @@ A series of case studies on how to do machine learning engineering in AWS, cover
 ### [Jund Clothing](https://github.com/iahsanujunda/jund-clothing)
 _**React | Redux | Heroku**_
 Clothing marketplace app with authentication using firebase and payment with stripe.
+
+### [Sudoku-solving agent](https://github.com/iahsanujunda/sudoku-solver)
+_**Python**_
+Intelligent agent to solve sudoku puzzles. Using constraint propagation and depth-first search algorithm.
