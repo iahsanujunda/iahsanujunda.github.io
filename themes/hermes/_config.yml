@@ -1,7 +1,7 @@
 menu:
     Blog: /
     Projects: projects/
-    About: https://www.linkedin.com/in/izzuddinahsanujunda
+    About: 'https://www.linkedin.com/in/izzuddinahsanujunda'
     Archive: archives/
 
 favicon: favicon.png
