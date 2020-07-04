@@ -1,7 +1,7 @@
 meta(charset="utf-8")
 meta(name="X-UA-Compatible", content="IE=edge")
 
-title 
+title
     block site_title
         = config.title
 block description
@@ -11,6 +11,23 @@ meta(name="viewport", content="width=device-width, initial-scale=1")
 link(rel="icon", href=url_for(theme.favicon))
 link(rel="stylesheet", href=url_for("css/hermes.css"))
 
+if theme.ga
+    script.
+      (function (b, o, i, l, e, r) {
+        b.GoogleAnalyticsObject = l;
+        b[l] || (b[l] =
+          function () {
+            (b[l].q = b[l].q || []).push(arguments)
+          });
+        b[l].l = +new Date;
+        e = o.createElement(i);
+        r = o.getElementsByTagName(i)[0];
+        e.src = '//www.google-analytics.com/analytics.js';
+        r.parentNode.insertBefore(e, r)
+      }(window, document, 'script', 'ga'));
+      ga('create', '#{theme.ga}');
+      ga('send', 'pageview');
+
 - var xml = config.url + '/atom.xml'
-    link(rel="search", type="application/opensearchdescription+xml", href=xml, title=config.title)
+link(rel="search", type="application/opensearchdescription+xml", href=xml, title=config.title)
     
