@@ -60,7 +60,7 @@ object Binarizer {
   def process(threshold: Int, inputColName: String)(df: DataFrame): DataFrame = {
     df.withColumn(
         "output",
-        when(inputColName < threshold, 1).otherwise(0) 
+        when(inputColName < threshold, 0).otherwise(1) 
     )
   }
 }
