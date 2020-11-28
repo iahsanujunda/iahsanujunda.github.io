@@ -51,7 +51,7 @@ In this post, we use funsuite test style because it is the style that is used by
 Now let's imagine a function that will binarize a column based on a threshold number. Any number less than this number will be converted into 0s and the rest will be converted into 1s.
 
 ```
-package io.github.ahsanujunda.spark.unitTest.example
+package io.github.iahsanujunda.spark.unitTest.example
 
 import org.apache.spark.sql.DataFrame
 import org.apache.spark.sql.functions._
@@ -97,7 +97,7 @@ This function will work basically as follows.
 With funsuite style, test case for above scenario will look like this
 
 ```
-package io.github.ahsanujunda.spark.unitTest.example
+package io.github.iahsanujunda.spark.unitTest.example
 
 import org.scalatest.Matchers
 import org.scalatest.funsuite.AnyFunSuite
@@ -107,7 +107,7 @@ class HelloWorldSuite extends AnyFunSuite with Matchers {
     import spark.implicits._
 
     test("must correctly identify 0s and 1s") {
-        import io.github.ahsanujunda.spark.unitTest.example.Binarizer
+        import io.github.iahsanujunda.spark.unitTest.example.Binarizer
         
         val mockedDf = Seq(
             ("id1", 2)
@@ -134,7 +134,7 @@ Now let's say we want to add some extra functionality to our Binarizer. We want 
 ```
 .....
 test("must correctly identify 0s and 1s") {
-    import io.github.ahsanujunda.spark.unitTest.example.Binarizer
+    import io.github.iahsanujunda.spark.unitTest.example.Binarizer
     
     val mockedDf = Seq(
         ("id1", 2)
