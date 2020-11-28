@@ -6,7 +6,7 @@ tags:
 
 By nature, machine learning models that run on production need to deal with... well... data, presumably lots of them. There will be times that among many data that our model need to deal with, there will be bad ones. In which case, machine learning models tend to either immediately stop processing data, or continued on with processing and produce smelly result. The impact of both are bad.
 
-Unit testing ML models equip us as developers with an extra confidence to put models in production, by giving a way to try and handle various edge cases that will be handled by various isolated modules of the processing pipeline.
+Unit testing ML models equip us as developers with an extra confidence to put models in production, by giving a way to an isolated modules in an ML pipeline to face various edge cases and try to handle them accordingly.
 
 <!-- more -->
 
@@ -46,9 +46,9 @@ Once the `pom.xml` has been set up, compile the project to let maven refreshes. 
 
 ## Funsuite Test Styles
 
-As mentioned, scalatest support several test style, in this post we use funsuite style because that is the style that is used by Spark themselves, so if we are stuck and would want to look for inspiration, we can simply open Spark project on github.
+In this post, we use funsuite test style because it is the style that is used by Spark themselves, means if we are stuck and in need for inspiration, simply go to Spark project on github where it host tons of battle-tested test cases.
 
-Let's imagine a function that will binarize a column based on a threshold. Any number less than threshold will be converted into 0s and the rest will be converted into 1s.
+Now let's imagine a function that will binarize a column based on a threshold number. Any number less than this number will be converted into 0s and the rest will be converted into 1s.
 
 ```
 package io.github.ahsanujunda.spark.unitTest.example
@@ -165,9 +165,9 @@ object Binarizer {
 }
 ```
 
-If we run the test case now, it will success. Wait... did we just casually summon TDD out of nowhere? Yes, we are. TDD is a very good software development practice. Considering we write our machine learning pipeline as a software, no harm in adding another jargon to our practice.
+If we run the test case now, it will success. Wait... did we just casually summon TDD out of nowhere? Yes, we are. TDD is a very good software development practice. Considering we write our machine learning pipeline as a software, no harm in adding another jargon to our practice if it make our ML model better.
 
-Now that we tackle the basic functionality, we can move on to an even richer test cases. What if we supply a string as the input column? Should we convert this string into number types if possible? or should we just throw an exception with a friendly advice to our fellow developer to please dont do that? What if we pass output column name that already exists in the dataframe? We can think of lots and lots of edge cases, and we can be confident that when our model faces bad data in production, it will act exactly as we have told it to.
+Now that we tackle the basic functionality, we can move on to an even richer test cases. What if we supply a column of strings as the input? Should we try to convert this string into number types if possible? or should we just throw an exception with a friendly advice to our fellow developer to please dont do that? What if we pass output column name that already exists in the dataframe? What if the threshold number appears as input, should it be 0 or should it be 1? We can think of lots and lots of edge cases, and we can be confident that when our model faces these gangsters in production, it wont just pack up and run away.
 
 If you need an inspiration on what to test and how to check them, scalatest already wrote a comprehensive guide on the test styles and matcher objects. You can [check them out here](https://www.scalatest.org/at_a_glance/FunSuite).
 
