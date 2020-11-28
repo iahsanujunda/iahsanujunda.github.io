@@ -167,9 +167,9 @@ object Binarizer {
 
 If we run the test case now, it will success. Wait... did we just casually summon TDD out of nowhere? Yes, we are. TDD is a very good software development practice. Considering we write our machine learning pipeline as a software, no harm in adding another jargon to our practice if it make our ML model better.
 
-Now that we tackle the basic functionality, we can move on to an even richer test cases. What if we supply a column of strings as the input? Should we try to convert this string into number types if possible? or should we just throw an exception with a friendly advice to our fellow developer to please dont do that? What if we pass output column name that already exists in the dataframe? What if the threshold number appears as input, should it be 0 or should it be 1? We can think of lots and lots of edge cases, and we can be confident that when our model faces these gangsters in production, it wont just pack up and run away.
+Now that we tackle the basic functionality, we can move on to an even richer test cases. What if we supply a column of strings as the input? Should we try to convert this string into number types if possible? or should we just throw an exception with a friendly advice to our fellow developer to please dont do that? What if we pass output column name that already exists in the dataframe? What if the threshold number appears as input, should it be 0 or should it be 1? We can think of lots and lots of edge cases, and we can be confident that when our model face these gangsters in production, it wont just pack up and run away.
 
-If you need an inspiration on what to test and how to check them, scalatest already wrote a comprehensive guide on the test styles and matcher objects. You can [check them out here](https://www.scalatest.org/at_a_glance/FunSuite).
+If you need an inspiration on **fantastic tests and how to find them**, scalatest already wrote a comprehensive guide on the test styles and matcher objects. You can [check them out here](https://www.scalatest.org/at_a_glance/FunSuite).
 
 ## Other Test Styles
 
