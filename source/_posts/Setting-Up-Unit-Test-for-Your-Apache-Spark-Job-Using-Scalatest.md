@@ -133,7 +133,7 @@ Now let's say we want to add some extra functionality to our Binarizer. We want 
 
 ```
 .....
-test("must correctly identify 0s and 1s") {
+test("must correctly produce configurable schema") {
     import io.github.iahsanujunda.spark.unitTest.example.Binarizer
     
     val mockedDf = Seq(
