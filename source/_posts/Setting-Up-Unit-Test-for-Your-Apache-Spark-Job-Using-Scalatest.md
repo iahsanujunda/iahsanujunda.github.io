@@ -20,24 +20,29 @@ This post explains how to set up unit testing environment and shows simple examp
 
 First and foremost, we have to setup scalatest library in to our project. [Scalatest](https://www.scalatest.org/) supports many test styles, runners, and rich assertion library. It will make unit testing easier. We can setup scalatest using maven siply by adding the following lines to our `pom.xml`
 
-```
-<dependency>
+```xml
+<dependencies>
+  ...
+  <!--  other dependencies-->
+  ...
+  <dependency>
     <groupId>org.scalactic</groupId>
     <artifactId>scalactic_${scala.binary.version}</artifactId>
     <version>${scala.test.version}</version>
-</dependency>
-<dependency>
+  </dependency>
+  <dependency>
     <groupId>org.scalatest</groupId>
     <artifactId>scalatest-funsuite_${scala.binary.version}</artifactId>
     <version>${scala.test.version}</version>
     <scope>test</scope>
-</dependency>
-<dependency>
+  </dependency>
+  <dependency>
     <groupId>org.scalatest</groupId>
     <artifactId>scalatest-matchers-core_${scala.binary.version}</artifactId>
     <version>${scala.test.version}</version>
     <scope>test</scope>
-</dependency>
+  </dependency>
+</dependencies>
 ```
 
 Do take note on `scalatest-funsuite` part of the configuration. This is the test style that we are going to use. I will explain a bit more about test styles later, so just take a note of this part for now.
@@ -50,7 +55,7 @@ In this post, we use funsuite test style because it is the style that is used by
 
 Now let's imagine a function that will binarize a column based on a threshold number. Any number less than this number will be converted into 0s and the rest will be converted into 1s.
 
-```
+```scala
 package io.github.iahsanujunda.spark.unitTest.example
 
 import org.apache.spark.sql.DataFrame
@@ -68,7 +73,7 @@ object Binarizer {
 
 This function will work basically as follows.
 
-```
+```bash
 // before
 +-----+--------+
 | id  | metric |
@@ -96,7 +101,7 @@ This function will work basically as follows.
 
 With funsuite style, test case for above scenario will look like this
 
-```
+```scala
 package io.github.iahsanujunda.spark.unitTest.example
 
 import org.scalatest.Matchers
@@ -131,8 +136,8 @@ Easy isn't it? Funsuite and Matchers allows us to write an easy-to-read test cas
 
 Now let's say we want to add some extra functionality to our Binarizer. We want the output column to be configurable. Let's write the test case first.
 
-```
-.....
+```scala
+...
 test("must correctly produce configurable schema") {
     import io.github.iahsanujunda.spark.unitTest.example.Binarizer
     
@@ -149,12 +154,12 @@ test("must correctly produce configurable schema") {
     val schema = result.schema.fieldNames 
     schema should contain ("binarized_column")
 }
-.....
+...
 ```
 
 When we run it now, it will fail, so we have to modify our Binarizer implementation as well.
 
-```
+```scala
 object Binarizer {
   def process(threshold: Int, inputColName: String, outputColName: String)(df: DataFrame): DataFrame = {
     df.withColumn(
