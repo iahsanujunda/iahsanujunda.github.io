@@ -15,7 +15,7 @@ I would strongly recommended anyone interested in this topic to go check out the
 
 ## User-Item Interaction for Recommendation
 
-In ideal world, our users would inform us their preference to items they have interact with. Imagine a 5 star rating systems in a music streaming app, where every users give their rating based how they are feeling after listening to songs. This is called *explicit data*, seeing as users give their preference *explicitly*.
+In ideal world, our users would inform us their preference to items they have interact with. Imagine a 5 star rating systems in a music streaming service, where every users give their rating based how they are feeling after listening to songs. This is called *explicit data*, seeing as users give their preference *explicitly*.
 
 However, real world is rarely ideal. Sometimes forcing users to give feedback everytime they interact with an item makes for bad experience, or perhaps explicit feedback is simply not possible to collect, for example due to regulation. There are other cases of course where we simply can't collect explicit feedback, and in all those cases we might need to turn to *implicit feedback*.
 
@@ -23,7 +23,7 @@ As the name implies, with implicit feedback data we infer user's preference of a
 
 With both types of feedback, the rating should give a sense of both *preference* and *confidence*, the former refers to signal of whether or not the user think positively of an item, and the later refers to how strong the feelings are.
 
-Take a sample of 5 star rating, a user might have personal preference cut off in 4 stars, meaning an item starred 4 is positive feedback, while 3 stars or less means negative feedback. Furthermore, within positive range, a 4 indicates weak positive feeling, while a 5 indicates strong positive feeling. This is how preference and confidence is illustrated.
+Revisiting the 5 star rating example, a user might have personal preference cut off in 4 stars, meaning an item starred 4 is positive feedback, while 3 stars or less means negative feedback. Furthermore, within positive range, a 4 indicates weak positive feeling, while a 5 indicates strong positive feeling. This is how preference and confidence is illustrated.
 
 In an implicit spectrum, we could take a look in viewing history of a video from a video streaming service. A video watched multiple times by a user might indicate their positive feeling about that particular video, with the higher number of views indicates a strong positive feeling.
 
@@ -37,11 +37,9 @@ Credit: https://medium.com/radon-dev/als-implicit-collaborative-filtering-5ed653
 
 ## Going from Matrix Representation to Making Recommendation
 
-In order to make a recommendation, we are going to decompose our original matrix $R$ in order to learn what kind pattern represented by our observed rating. Basically we are going to breakdown our $R$ matrix into several smaller matrices that will represent the pattern of the original $R$.
+In order to make a recommendation, we are going to decompose our original matrix $R$ in order to learn what kind pattern represented by our observed rating. Basically we are going to breakdown our $R$ matrix into several smaller matrices that will each represent a pattern to build the original $R$.
 
-One popular way to do this is by using technique Singular Value Decomposition (SVD).
-
-SVD decomposes our original observation matrix $R$ into three matrices.
+One popular way to do this is by using technique Singular Value Decomposition (SVD). SVD decomposes our original observation matrix $R$ into three matrices.
 
 <div style="text-align: center;">
 $$
@@ -51,9 +49,9 @@ $$
 
 where
 
-* $U$ is an orthonormal matrix
+* $U$ is an orthonormal matrix, whose columns are left singular vector
 * $\Sigma$ is diagonal matrix, whose diagonals are called singular values
-* $V$ is an orthonormal matrix
+* $V$ is an orthonormal matrix, whose columns are right singular vectors
 
 The dimension of each submatrices will be determined based on the original values of $R$, however we can select only top $k$ singular values of each submatrices, therefore the dimension of our submatrices will be:
 
@@ -61,13 +59,15 @@ The dimension of each submatrices will be determined based on the original value
 * $\Sigma: k\ast k $
 * $V: k\ast i $
 
+Because we select only top $k$ singular values, we might lose some information to build the original $R$. Therefore what we get is an approximation of $R$ instead, called $\hat{R}$.
+
 <img src="https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/R-SVD.png" alt="R SVD" width="800"/>
 
 Credit: https://medium.com/radon-dev/als-implicit-collaborative-filtering-5ed653ba39fe
 
 Above illustration shows approximately how SVD looks. Note that the illustration has no $\Sigma$ and the reason is quite simple, when we multiply a matrix with suitably-sized square matrix, it will results in a matrix with the exact same dimension. In this case, $\Sigma$ is the square matrix with a dimension that matches with both $U$ and $V^{T}$, so $\Sigma$ can be absorbed to either one.
 
-We can see that our $U$ and $V$ matrices now contains the pattern from the original user and item interaction. With each row $u$ in $U$ represents a vector that contains the pattern of user $u$. While each column $i$ in $V^{T}$ represents a vector that contains the pattern of item $i$. Because these vectors represent user patterns and item patterns, respectively, in technical terms they are referred to as *latent factor vectors*, with $x_{u}$ is a latent factor vector of user $u$, while $y_{i}$ is a latent factor vector of item $i$.
+We can see that our $U$ and $V$ matrices now contains the pattern from the original user and item interaction. With each row $u$ in $U$ represents a vector that contains the pattern of user $u$. While each column $i$ in $V^{T}$ represents a vector that contains the pattern of item $i$. Because these vectors represent user patterns and item patterns, respectively, in technical terms they are referred to as *latent factor vectors*, with $x_{u}$ is a latent factor vector of user $u$, while $y_{i}$ is a latent factor vector of item $i$. the number of *latent factor* we retain is the number of top $k$ singular values that we select earlier. 
 
 Now that we are able to get latent factors of any particular users and items, making recommendation is simply a process of taking product of $x_{u}$ to $y_{i}$.
 
