@@ -29,7 +29,7 @@ In an implicit spectrum, we could take a look in viewing history of a video from
 
 ## Matrix Representation of User-Item Interaction
 
-With $u$ number of users and $i$ number of items, we can then build matrix $R$ of size $m\ast n$ that represents this feedback.
+With $u$ number of users and $i$ number of items, we can then build matrix $R$ of size $u\ast i$ that represents this feedback.
 
 <img src="https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/matrix-R.png" alt="matrix R" width="300"/>
 
@@ -50,7 +50,7 @@ $$
 where
 
 * $U$ is an orthonormal matrix, whose columns are left singular vector
-* $\Sigma$ is diagonal matrix, whose diagonals are called singular values
+* $\Sigma$ is a diagonal matrix, whose diagonals are called singular values
 * $V$ is an orthonormal matrix, whose columns are right singular vectors
 
 The dimension of each submatrices will be determined based on the original values of $R$, however we can select only top $k$ singular values of each submatrices, therefore the dimension of our submatrices will be:
@@ -59,7 +59,7 @@ The dimension of each submatrices will be determined based on the original value
 * $\Sigma: k\ast k $
 * $V: k\ast i $
 
-Because we select only top $k$ singular values, we might lose some information to build the original $R$. Therefore what we get is an approximation of $R$ instead, called $\hat{R}$.
+Due to the fact that we select only top $k$ singular values, we might lose some information to build the original $R$. Therefore what we get is an *approximation* of $R$ instead, called $\hat{R}$.
 
 <img src="https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/R-SVD.png" alt="R SVD" width="800"/>
 
@@ -79,4 +79,4 @@ $$
 
 With $\hat{r}\_{ui}$ is the recommendation value to give for a particular user and item.
 
-Ideally, when we know the value $r\_{ui}$ , we want $\hat{r}\_{ui}$ to be as close as possible to $r\_{ui}$. The interesting part is where we don't know the actual value of $r\_{ui}$ seeing as our $R$ is sparse. If original $r\_{ui}$ is empty, but $\hat{r}\_{ui}$ return non-empty value, this is the potential recommendation that we discover from our latent factors. Therefore, when we want to recommend items to user $u$, we can dot product all $y_{i}$ to a constant $x_{u}$ to get all $\hat{r}\_{ui}$ for this particular user. We can then sort all items based on the resulting $\hat{r}_{ui}$. The top $\hat{r}\_{ui}$ is the ones we could recommend to the user.
+Ideally, when we know the value $r\_{ui}$ , we want $\hat{r}\_{ui}$ to be as close as possible to $r\_{ui}$. The interesting part is where we don't know the actual value of $r\_{ui}$ seeing as our $R$ is sparse. If original $r\_{ui}$ is empty, but $\hat{r}\_{ui}$ return non-empty value, this is the potential recommendation that we discover from our latent factors. With this logic, when we want to recommend items to user $u$, we can dot product all $y_{i}$ to a constant $x_{u}$ to get all $\hat{r}\_{ui}$ for this particular user. We can then sort all items based on the resulting $\hat{r}_{ui}$. The top $\hat{r}\_{ui}$ is the ones we could recommend to the user.
