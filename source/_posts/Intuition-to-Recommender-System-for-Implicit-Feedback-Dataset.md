@@ -40,3 +40,43 @@ Credit: https://medium.com/radon-dev/als-implicit-collaborative-filtering-5ed653
 In order to make a recommendation, we are going to decompose our original matrix $R$ in order to learn what kind pattern represented by our observed rating. Basically we are going to breakdown our $R$ matrix into several smaller matrices that will represent the pattern of the original $R$.
 
 One popular way to do this is by using technique Singular Value Decomposition (SVD).
+
+SVD decomposes our original observation matrix $R$ into three matrices.
+
+<div style="text-align: center;">
+$
+R=U\Sigma V^{T}
+$
+</div>
+
+where
+
+* $U$ is an orthonormal matrix
+* $\Sigma$ is diagonal matrix, whose diagonals are called singular values
+* $V$ is an orthonormal matrix
+
+The dimension of each submatrices will be determined based on the original values of $R$, however we can select only top $k$ singular values of each submatrices, therefore the dimension of our submatrices will be:
+
+* $U: u\ast k $
+* $\Sigma: k\ast k $
+* $V: k\ast i $
+
+<img src="https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/R-SVD.png" alt="R SVD" width="800"/>
+
+Credit: https://medium.com/radon-dev/als-implicit-collaborative-filtering-5ed653ba39fe
+
+Above illustration shows approximately how SVD looks. Note that the illustration has no $\Sigma$ and the reason is quite simple, when we multiply a matrix with suitably-sized square matrix, it will results in a matrix with the exact same dimension. In this case, $\Sigma$ is the square matrix with a dimension that matches with both $U$ and $V^{T}$, so $\Sigma$ can be absorbed to either one.
+
+We can see that our $U$ and $V$ matrices now contains the pattern from the original user and item interaction. With each row $u$ in $U$ represents a vector that contains the pattern of user $u$. While each column $i$ in $V^{T}$ represents a vector that contains the pattern of item $i$. Because these vectors represent user patterns and item patterns, respectively, in technical terms they are referred to as *latent factor vectors*, with $x_{u}$ is a latent factor vector of user $u$, while $y_{i}$ is a latent factor vector of item $i$.
+
+Now that we are able to get latent factors of any particular users and items, making recommendation is simply a process of taking product of $x_{u}$ to $y_{i}$.
+
+<div style="text-align: center;">
+$
+\hat{r}_{ui} = x_{u}{y_{i}}^{T}
+$
+</div>
+
+With $\hat{r}\_{ui}$ is the recommendation value to give for a particular user and item.
+
+Ideally where we know the value $r\_{ui}$ , we want $\hat{r}\_{ui}$ to be as close as possible to $r\_{ui}$. So when we want to recommend items to user $u$, we can dot product all $y_{i}$ to a constant $x_{u}$ to get all $\hat{r}\_{ui}$ for this particular user. We can then sort all items based on the resulting $\hat{r}_{ui}$. The top $\hat{r}\_{ui}$ is the ones we could recommend to the user.
