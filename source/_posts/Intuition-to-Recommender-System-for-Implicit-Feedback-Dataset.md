@@ -5,11 +5,11 @@ tags:
 mathjax: true
 ---
 
-I have been tinkering with recommender system at work for a few months now. In order to gain deeper understanding on how the model works, how to the training process learns from data, and how to make recommendation from learned model. This post is basically the overview on what I've learnt.
-
-<!-- more -->
+I have been tinkering with recommender system at work for a few months now in order to gain deeper understanding on how the model works, how the training process learns from observation data, and how to make recommendation from learned model. This post is basically the overview on what I've learnt and will be divided into several parts, this is the first.
 
 This post will rely heavily on paper from Yifan Hu, Yehuda Koren, and Chris Volinsky titled ["Collaborative Filtering with Implicit Feedback Dataset"](http://yifanhu.net/PUB/cf.pdf). The theory laid out in the paper has been incorporated into several open source tools to build recommender systems, most prominently perhaps the [Apache Spark's ALS](https://spark.apache.org/docs/2.2.0/ml-collaborative-filtering.html) package.
+
+<!-- more -->
 
 I would strongly recommended anyone interested in this topic to go check out the paper for a more thorough study.
 
