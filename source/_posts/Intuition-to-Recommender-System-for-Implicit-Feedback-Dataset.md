@@ -44,9 +44,9 @@ One popular way to do this is by using technique Singular Value Decomposition (S
 SVD decomposes our original observation matrix $R$ into three matrices.
 
 <div style="text-align: center;">
-$
+$$
 R=U\Sigma V^{T}
-$
+$$
 </div>
 
 where
@@ -72,9 +72,9 @@ We can see that our $U$ and $V$ matrices now contains the pattern from the origi
 Now that we are able to get latent factors of any particular users and items, making recommendation is simply a process of taking product of $x_{u}$ to $y_{i}$.
 
 <div style="text-align: center;">
-$
-\hat{r}_{ui} = x_{u}{y_{i}}^{T}
-$
+$$
+\hat{r}_{ui}=x_{u}{y_{i}}^{T}
+$$
 </div>
 
 With $\hat{r}\_{ui}$ is the recommendation value to give for a particular user and item.
