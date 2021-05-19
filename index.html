@@ -1,5 +1,117 @@
-<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>Izzuddin Ahsanujunda Blog</title><meta name="description" content="When I learn something, I write them down"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="favicon.png"><link rel="stylesheet" href="css/hermes.css"><link rel="search" type="application/opensearchdescription+xml" href="https://iahsanujunda.github.io/atom.xml" title="Izzuddin Ahsanujunda Blog"><meta name="generator" content="Hexo 5.4.0"><link rel="alternate" href="atom.xml" title="Izzuddin Ahsanujunda Blog" type="application/atom+xml">
-</head><body><div class="wrap"><header><a class="logo-link" href="index.html"><img src="favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link active" href="index.html" target="_self">BLOG</a></li><li class="nav-list-item"><a class="nav-list-link" href="projects/" target="_self">PROJECTS</a></li><li class="nav-list-item"><a class="nav-list-link" href="https://www.linkedin.com/in/izzuddinahsanujunda" target="_blank">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link" href="archives/" target="_self">ARCHIVE</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a class="post-title-link" href="posts/20201128/Setting-Up-Unit-Test-for-Your-Apache-Spark-Job-Using-Scalatest/">Setting Up Unit Test for Your Apache Spark Job Using Scalatest</a></h2><div class="post-info">Nov 28, 2020</div><div class="post-content"><p>By nature, machine learning models that run on production need to deal with… well… data, presumably lots of them. There will be times that among many data that our model need to deal with, there will be bad ones. In which case, machine learning models tend to either immediately stop processing data, or continued on with processing and produce smelly result. The impact of both are bad.</p>
+<!DOCTYPE html><html lang="en"><head><meta charset="utf-8"><meta name="X-UA-Compatible" content="IE=edge"><title>Izzuddin Ahsanujunda Blog</title><meta name="description" content="When I learn something, I write them down"><meta name="viewport" content="width=device-width, initial-scale=1"><link rel="icon" href="favicon.png"><link rel="stylesheet" href="css/hermes.css"><link rel="search" type="application/opensearchdescription+xml" href="https://iahsanujunda.github.io/atom.xml" title="Izzuddin Ahsanujunda Blog"><meta name="generator" content="Hexo 5.4.0"><style>mjx-container[jax="SVG"] {
+  direction: ltr;
+}
+
+mjx-container[jax="SVG"] > svg {
+  overflow: visible;
+}
+
+mjx-container[jax="SVG"][display="true"] {
+  display: block;
+  text-align: center;
+  margin: 1em 0;
+}
+
+mjx-container[jax="SVG"][justify="left"] {
+  text-align: left;
+}
+
+mjx-container[jax="SVG"][justify="right"] {
+  text-align: right;
+}
+
+g[data-mml-node="merror"] > g {
+  fill: red;
+  stroke: red;
+}
+
+g[data-mml-node="merror"] > rect[data-background] {
+  fill: yellow;
+  stroke: none;
+}
+
+g[data-mml-node="mtable"] > line[data-line] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > rect[data-frame] {
+  stroke-width: 70px;
+  fill: none;
+}
+
+g[data-mml-node="mtable"] > .mjx-dashed {
+  stroke-dasharray: 140;
+}
+
+g[data-mml-node="mtable"] > .mjx-dotted {
+  stroke-linecap: round;
+  stroke-dasharray: 0,140;
+}
+
+g[data-mml-node="mtable"] > svg {
+  overflow: visible;
+}
+
+[jax="SVG"] mjx-tool {
+  display: inline-block;
+  position: relative;
+  width: 0;
+  height: 0;
+}
+
+[jax="SVG"] mjx-tool > mjx-tip {
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+mjx-tool > mjx-tip {
+  display: inline-block;
+  padding: .2em;
+  border: 1px solid #888;
+  font-size: 70%;
+  background-color: #F8F8F8;
+  color: black;
+  box-shadow: 2px 2px 5px #AAAAAA;
+}
+
+g[data-mml-node="maction"][data-toggle] {
+  cursor: pointer;
+}
+
+mjx-status {
+  display: block;
+  position: fixed;
+  left: 1em;
+  bottom: 1em;
+  min-width: 25%;
+  padding: .2em .4em;
+  border: 1px solid #888;
+  font-size: 90%;
+  background-color: #F8F8F8;
+  color: black;
+}
+
+foreignObject[data-mjx-xml] {
+  font-family: initial;
+  line-height: normal;
+  overflow: visible;
+}
+
+.MathJax path {
+  stroke-width: 3;
+}
+
+mjx-container[display="true"] {
+  overflow: auto hidden;
+}
+
+mjx-container[display="true"] + br {
+  display: none;
+}
+</style><link rel="alternate" href="atom.xml" title="Izzuddin Ahsanujunda Blog" type="application/atom+xml">
+</head><body><div class="wrap"><header><a class="logo-link" href="index.html"><img src="favicon.png" alt="logo"></a><ul class="nav nav-list"><li class="nav-list-item"><a class="nav-list-link active" href="index.html" target="_self">BLOG</a></li><li class="nav-list-item"><a class="nav-list-link" href="projects/" target="_self">PROJECTS</a></li><li class="nav-list-item"><a class="nav-list-link" href="https://www.linkedin.com/in/izzuddinahsanujunda" target="_blank">ABOUT</a></li><li class="nav-list-item"><a class="nav-list-link" href="archives/" target="_self">ARCHIVE</a></li></ul></header><main class="container"><ul class="home post-list"><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a class="post-title-link" href="posts/20210517/Intuition-to-Recommender-System-for-Implicit-Feedback-Dataset/">Intuition to Recommender System for Implicit Feedback Dataset</a></h2><div class="post-info">May 17, 2021</div><div class="post-content"><p>I have been tinkering with recommender system at work for a few months now. In order to gain deeper understanding on how the model works, how to the training process learns from data, and how to make recommendation from learned model. This post is basically the overview on what I’ve learnt.</p></div><a class="read-more" href="posts/20210517/Intuition-to-Recommender-System-for-Implicit-Feedback-Dataset/">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a class="post-title-link" href="posts/20201128/Setting-Up-Unit-Test-for-Your-Apache-Spark-Job-Using-Scalatest/">Setting Up Unit Test for Your Apache Spark Job Using Scalatest</a></h2><div class="post-info">Nov 28, 2020</div><div class="post-content"><p>By nature, machine learning models that run on production need to deal with… well… data, presumably lots of them. There will be times that among many data that our model need to deal with, there will be bad ones. In which case, machine learning models tend to either immediately stop processing data, or continued on with processing and produce smelly result. The impact of both are bad.</p>
 <p>Unit testing ML models equip us as developers with an extra confidence to put models in production, by giving a way to an isolated modules in an ML pipeline to face various edge cases and try to handle them accordingly.</p></div><a class="read-more" href="posts/20201128/Setting-Up-Unit-Test-for-Your-Apache-Spark-Job-Using-Scalatest/">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a class="post-title-link" href="posts/20200607/Collecting-and-Managing-your-Data/">Collecting and Managing your Data</a></h2><div class="post-info">Jun 7, 2020</div><div class="post-content"><p>One often overlooked aspect of data analysis project is keeping track of the data that we are working on. Our data will evolve during the course of analysis project, sometime new variables will be introduced, sometimes we redefined an old variables, or sometimes we dropped a variable that deemed no longer relevant.</div><a class="read-more" href="posts/20200607/Collecting-and-Managing-your-Data/">...more</a></article></li><li class="post-list-item"><article class="post-block"><h2 class="post-title"><a class="post-title-link" href="posts/20200606/Starting-Analytics-Project/">Starting Analytics Project</a></h2><div class="post-info">Jun 6, 2020</div><div class="post-content"><p>Making a good question is important step of any analytics project, and unfortunately, a concept of bad question exists when it comes to analytics. We are going to identify good ones from bad ones as we go along. I start this project by creating a code book for the dataset that we are working on in this project, it will start from a single variable and it <em>will</em> evolve as we went through all analytics phases.</p></div><a class="read-more" href="posts/20200606/Starting-Analytics-Project/">...more</a></article></li></ul></main><footer><div class="paginator"></div><div class="copyright"><p>© 2020 - 2021 <a href="https://iahsanujunda.github.io">Izzuddin Ahsanujunda</a>, powered by <a href="https://hexo.io/" target="_blank">Hexo</a> and <a href="https://github.com/claymcleod/hexo-theme-hermes" target="_blank">hexo-theme-hermes</a>. </p><p>Logo and Icon made by <a target="_blank" rel="noopener" href="https://www.flaticon.com/authors/freepik">Freepik</a> from <a target="_blank" rel="noopener" href="https://flaticon.com">www.flaticon.com</a>.</p></div></footer></div><script async src="//cdn.bootcss.com/mathjax/2.7.0/MathJax.js?config=TeX-MML-AM_CHTML" integrity="sha384-crwIf/BuaWM9rM65iM+dWFldgQ1Un8jWZMuh3puxb8TOY9+linwLoI7ZHZT+aekW" crossorigin="anonymous"></script><!-- Global site tag (gtag.js) - Google Analytics --><script>(function (b, o, i, l, e, r) {
   b.GoogleAnalyticsObject = l;
   b[l] || (b[l] =
