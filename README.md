@@ -1,7 +1,7 @@
 # iahsanujunda.github.io
 
 <p align="center">
-<img src="./themes/hermes/source/favicon.png" height="30%" width="30%" alt="jund-clothing" />
+<img src="./themes/cactus/source/images/darkicon.png" height="30%" width="30%" alt="jund-clothing" />
 </p>
 
 This is the accompanying repository of [iahsanujunda.github.io](https://iahsanujunda.github.io), a personal blog powered by [hexo](https://www.hexo.io). Hexo is a light-weight blogging engine that only depends on parsing text files.
