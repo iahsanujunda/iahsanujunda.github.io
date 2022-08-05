@@ -1,0 +1,22 @@
+[
+    {
+       "name":"Movie Review Sentiment Analysis",
+       "url":"https://github.com/iahsanujunda/sentiment-analysis-sagemaker-pytorch/",
+       "desc":"LSTM recurrent neural network for sentiment analysis that is trained on IMDB dataset and developed using pytorch. The model is deployed on AWS sagemaker and can be invoked from AWS lambda. Public access to the model is established from React web app that will send http request to invoke the lambda function."
+    },
+    {
+       "name":"Machine Learning on Sagemaker",
+       "url":"https://github.com/iahsanujunda/ml_sagemaker_studies/",
+       "desc":"A series of case studies on how to do machine learning engineering in AWS, covering unsupervised learning, supervised learning, and time-series analysis."
+    },
+    {
+        "name":"Jund Clothing",
+        "url":"https://github.com/iahsanujunda/jund-clothing/",
+        "desc":"Clothing marketplace app with authentication using firebase and payment with stripe."
+    },
+    {
+        "name":"Sudoku-solving agent",
+        "url":"https://github.com/iahsanujunda/sudoku-solver/",
+        "desc":"Intelligent agent to solve sudoku puzzles. Using constraint propagation and depth-first search algorithm."
+    }
+]
