@@ -26,7 +26,7 @@ To start building a pipeline using the mlflow project, we need to install the `m
  
 Let's start by making a new directory, and change into it.
  
-```
+```shell
 mkdir rental_prediction_pipeline
 cd rental_prediction_pipeline
 ```
@@ -41,7 +41,7 @@ The `MLproject` file dictates how mlflow should run our source code. While `cond
  
 For our needs, let's fill the `MLproject` file with the following configuration.
  
-```
+```yaml
 # ./MLProject
 name: nyc_airbnb
 conda_env: conda.yml
@@ -68,7 +68,7 @@ After that we specify entry points. Mlflow asks that every `MLproject` should co
  
 Now, let's write into `conda.yml`.
  
-```
+```yaml
 # ./conda.yml
 name: nyc_airbnb
 channels:
@@ -111,14 +111,14 @@ conda activate nyc_airbnb
  
 Now we can start to create our main entry point by making the directories.
  
-```
+```shell
 mkdir nyc_airbnb
 touch nyc_airbnb/main.py
 ```
  
 Let's open the `nyc_airbnb/main.py` file, and write code in it.
  
-```
+```python
 # nyc_airbnb/main.py
 import json
  
@@ -182,7 +182,7 @@ To start, let's create the file to hold our download logic.
  
 Open this file and let's put in our logic there.
  
-```
+```python
 # ./nyc_airbnb/get_data.py
  
 import argparse
@@ -325,8 +325,8 @@ touch nyc_airbnb/utils/base_runner
 
 Open this new file and copy paste the following code.
 
-```
-# ./nyc_airbnb/utils/base_runner
+```python
+# ./nyc_airbnb/utils/base_runner.py
 import wandb
 import logging
 import pandas as pd
@@ -427,7 +427,7 @@ class BaseRunner:
  
 Now we are ready to set this up into our main entry point. Let's open the `MLproject` file and put a new entry point.
  
-```
+```yaml
 # ./MLproject
 ...
 entry_points:
@@ -461,7 +461,7 @@ entry_points:
  
 Now open `main.py` and let's call our new entry point from the main entry point.
  
-```
+```python
 # main.py
 import json
  
