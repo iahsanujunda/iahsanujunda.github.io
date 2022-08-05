@@ -1,0 +1,362 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="MLflow is a very nice tool to handle our MLOps needs. It covers several important features for doing MLOps, namely tracking server, model registry, and source code packaging. Here we are going to focu">
+<meta property="og:type" content="article">
+<meta property="og:title" content="MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component">
+<meta property="og:url" content="https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/">
+<meta property="og:site_name" content="Izzuddin Ahsanujunda Blog">
+<meta property="og:description" content="MLflow is a very nice tool to handle our MLOps needs. It covers several important features for doing MLOps, namely tracking server, model registry, and source code packaging. Here we are going to focu">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1KVqCU7TUzuln1CPufvR60X9_a4Evqf1r">
+<meta property="article:published_time" content="2021-08-02T14:49:38.000Z">
+<meta property="article:modified_time" content="2022-08-05T15:46:45.037Z">
+<meta property="article:author" content="Izzuddin Ahsanujunda">
+<meta property="article:tag" content="data science, data analysis, machine learning, software development, data engineering">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://drive.google.com/uc?export=view&id=1KVqCU7TUzuln1CPufvR60X9_a4Evqf1r">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/iahsanujunda">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        <li><a class="icon" aria-label="Previous post" href="/posts/20210914/MLOps-Part-2-Feature-Engineering-and-Training/"><i class="fas fa-chevron-left" aria-hidden="true" onmouseover="$('#i-prev').toggle();" onmouseout="$('#i-prev').toggle();"></i></a></li>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/posts/20210517/Intuition-to-Recommender-System-for-Implicit-Feedback-Dataset/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&text=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&is_video=false&description=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component&body=Check out this article: https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&name=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component&description=&lt;p&gt;MLflow is a very nice tool to handle our MLOps needs. It covers several important features for doing MLOps, namely tracking server, model registry, and source code packaging. Here we are going to focus on &lt;a href=&#34;https://mlflow.org/docs/latest/projects.html&#34;&gt;MLFlow Projects&lt;/a&gt;, the source code packaging feature that can help us develop a reproducible machine learning pipeline.&lt;/p&gt;
+&lt;p&gt;MLFlow projects enable us to run source codes in a consistent way by encapsulating the runtime environment together with the source code, so that we can develop our source code on OSX, and have it run on linux with the same reproducible result, if we so need.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&t=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementation"><span class="toc-number">1.</span> <span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Initial-setup"><span class="toc-number">1.1.</span> <span class="toc-text">Initial setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Develop-main-entry-point"><span class="toc-number">1.2.</span> <span class="toc-text">Develop main entry point</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Develop-get-data-step"><span class="toc-number">1.3.</span> <span class="toc-text">Develop get_data step</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Test-run"><span class="toc-number">1.4.</span> <span class="toc-text">Test run</span></a></li></ol></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Izzuddin Ahsanujunda</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2021-08-02T14:49:38.000Z" itemprop="datePublished">2021-08-02</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>MLflow is a very nice tool to handle our MLOps needs. It covers several important features for doing MLOps, namely tracking server, model registry, and source code packaging. Here we are going to focus on <a target="_blank" rel="noopener" href="https://mlflow.org/docs/latest/projects.html">MLFlow Projects</a>, the source code packaging feature that can help us develop a reproducible machine learning pipeline.</p>
+<p>MLFlow projects enable us to run source codes in a consistent way by encapsulating the runtime environment together with the source code, so that we can develop our source code on OSX, and have it run on linux with the same reproducible result, if we so need.</p>
+<span id="more"></span>
+<p>Let’s imagine we build a machine learning training pipeline with the following function sequence.</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1KVqCU7TUzuln1CPufvR60X9_a4Evqf1r" alt="image"></p>
+<p>Leveraging the mlflow project will enable us to develop and run each component as a separate module. When we need to pass output of one component as an input of the succeeding component, we can do this as an argument.</p>
+<p>I say, it’s enough talking and let’s start making!</p>
+<h2 id="Implementation"><a href="#Implementation" class="headerlink" title="Implementation"></a>Implementation</h2><p>To start building a pipeline using the mlflow project, we need to install the <code>mlflow</code> library. This can easily be done using <code>pip install mlflow</code>. This will be useful to test run our pipeline code later. For the sake of clarity, I will build a model to predict AirBnB rental prices in NYC.</p>
+<h3 id="Initial-setup"><a href="#Initial-setup" class="headerlink" title="Initial setup"></a>Initial setup</h3><p>Let’s start by making a new directory, and change into it.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir rental_prediction_pipeline</span><br><span class="line">cd rental_prediction_pipeline</span><br></pre></td></tr></table></figure>
+<p>To start building with the mlflow project, we need to create several mandatory files.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">touch conda.yml MLproject</span><br></pre></td></tr></table></figure>
+<p>The <code>MLproject</code> file dictates how mlflow should run our source code. While <code>conda.yml</code> will be used to define our python environment to run the code.</p>
+<p>For our needs, let’s fill the <code>MLproject</code> file with the following configuration.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line"># ./MLProject</span><br><span class="line">name: nyc_airbnb</span><br><span class="line">conda_env: conda.yml</span><br><span class="line"> </span><br><span class="line">entry_points:</span><br><span class="line"> main:</span><br><span class="line">   parameters:</span><br><span class="line">     steps:</span><br><span class="line">       description: Comma-separated list of steps to execute (useful for debugging)</span><br><span class="line">       type: str</span><br><span class="line">       default: all</span><br><span class="line">     hydra_options:</span><br><span class="line">       description: Other configuration parameters to override</span><br><span class="line">       type: str</span><br><span class="line">       default: &#x27;&#x27;</span><br><span class="line">   command: &quot;python nyc_airbnb/main.py main.steps=\\&#x27;&#123;steps&#125;\\&#x27; $(echo &#123;hydra_options&#125;)&quot;</span><br></pre></td></tr></table></figure>
+<p>Let’s go through this.</p>
+<p>We first define the name of the environment we are running our source code in, called <code>nyc_airbnb</code>. Then we specify the file that contains how to create this environment in the <code>conda_env</code> part, with python it is common to use conda environment, therefore we provide our <code>conda.yml</code> into this. This file is currently empty but we will put something later.</p>
+<p>After that we specify entry points. Mlflow asks that every <code>MLproject</code> should contain a <code>main</code> entry point. When we run our code with mlflow, it will start by triggering the <code>nyc_airbnb/main.py</code>.</p>
+<p>Now, let’s write into <code>conda.yml</code>.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line"># ./conda.yml</span><br><span class="line">name: nyc_airbnb</span><br><span class="line">channels:</span><br><span class="line"> - conda-forge</span><br><span class="line"> - defaults</span><br><span class="line">dependencies:</span><br><span class="line"> - python=3.8.12</span><br><span class="line"> - autopep8=1.5.7</span><br><span class="line"> - click=8.0.3</span><br><span class="line"> - oss2=2.15.0</span><br><span class="line"> - numpy=1.21.2</span><br><span class="line"> - pandas=1.3.3</span><br><span class="line"> - coverage=6.0</span><br><span class="line"> - python-dotenv=0.19.0</span><br><span class="line"> - hydra-core=1.0.6</span><br><span class="line"> - pip=21.2.4</span><br><span class="line"> - python-decouple</span><br><span class="line"> - pyarrow=6.0.1</span><br><span class="line"> - scikit-learn=0.24.1</span><br><span class="line"> - scipy=1.7.3</span><br><span class="line"> - tqdm=4.62.3</span><br><span class="line"> - imbalanced-learn=0.8.1</span><br><span class="line"> - wandb=0.12.1</span><br><span class="line"> - pytorch=1.10.0</span><br><span class="line"> - mlflow=1.20.2</span><br><span class="line"> - pip:</span><br><span class="line">     - fsspec==2021.11.0</span><br></pre></td></tr></table></figure>
+<p>Mlflow will create this python virtual environment before it starts to run our source code, it will only create a new environment once to speed-up subsequent processes. An exception is when we modify the dependecy verison or add a new dependency, mlflow will create a new environment so that the source code starts fresh.</p>
+<p>For local development purposes, we should also create this virtual enviroment in our machine.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">conda env create -f environment.yml</span><br><span class="line">conda activate nyc_airbnb</span><br></pre></td></tr></table></figure>
+<h3 id="Develop-main-entry-point"><a href="#Develop-main-entry-point" class="headerlink" title="Develop main entry point"></a>Develop main entry point</h3><p>Now we can start to create our main entry point by making the directories.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir nyc_airbnb</span><br><span class="line">touch nyc_airbnb/main.py</span><br></pre></td></tr></table></figure>
+<p>Let’s open the <code>nyc_airbnb/main.py</code> file, and write code in it.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line"># nyc_airbnb/main.py</span><br><span class="line">import json</span><br><span class="line"> </span><br><span class="line">import mlflow</span><br><span class="line">import tempfile</span><br><span class="line">import os</span><br><span class="line">import wandb</span><br><span class="line">import hydra</span><br><span class="line">from omegaconf import DictConfig</span><br><span class="line"> </span><br><span class="line">_steps = [</span><br><span class="line">   &quot;download&quot;</span><br><span class="line">]</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line"># This automatically reads in the configuration</span><br><span class="line">@hydra.main(config_name=&#x27;config&#x27;)</span><br><span class="line">def go(config: DictConfig):</span><br><span class="line">   # Setup the wandb experiment. All runs will be grouped under this name</span><br><span class="line">   os.environ[&quot;WANDB_PROJECT&quot;] = config[&quot;main&quot;][&quot;project_name&quot;]</span><br><span class="line">   os.environ[&quot;WANDB_RUN_GROUP&quot;] = config[&quot;main&quot;][&quot;experiment_name&quot;]</span><br><span class="line"> </span><br><span class="line">   # Steps to execute</span><br><span class="line">   steps_par = config[&#x27;main&#x27;][&#x27;steps&#x27;]</span><br><span class="line">   active_steps = steps_par.split(&quot;,&quot;) if steps_par != &quot;all&quot; else _steps</span><br><span class="line"> </span><br><span class="line">   # Move to a temporary directory</span><br><span class="line">   with tempfile.TemporaryDirectory() as tmp_dir:</span><br><span class="line"> </span><br><span class="line">       if &quot;download&quot; in active_steps:</span><br><span class="line">           # Download file and load in W&amp;B</span><br><span class="line">           pass</span><br><span class="line"> </span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">   go()</span><br></pre></td></tr></table></figure>
+<p>There is a lot to digest here so please bear with me.</p>
+<p>We start by declaring our execution step as a list <code>_steps</code>. We start with only <code>download</code> in there, but we are going to grow it as we progress.</p>
+<p>After that, we create a wrapper function called <code>go()</code> where we are going to put the execution logic. We use <code>hydra</code> to handle our configuration. All of our config will be declared inside a separate <code>config.yaml</code> file. Hydra needs to be tied-in to <code>go()</code> function as a decorator.</p>
+<p>We start the function by setting up the environment variable, we read in the config from hydra and put it into the system’s env variable.</p>
+<p>After that we prepare <code>active_steps</code> - actual steps to execute. currently we only have one step so this part doesn’t do much, but once we have multiple steps, it will allow us to override execution of <code>_steps</code> by running this form CLI</p>
+<p><code>mlflow run nyc_airbnb/ -P steps=train</code></p>
+<p>if we run without <code>steps</code> argument like this <code>mlflow run nyc_airbnb</code>, the list we have in <code>_steps</code> will be used instead.</p>
+<p>Next part is where we put the skeleton that is going to tell mlflow what to run if <code>download</code> is in the steps that we should run.</p>
+<h3 id="Develop-get-data-step"><a href="#Develop-get-data-step" class="headerlink" title="Develop get_data step"></a>Develop get_data step</h3><p>We need a way to digest the data from a source system into our training pipeline. Source systems can be a data warehouse, a flat file on a shared file system, or by scrapping a web page. Once we obtain this data, we want to log this data so that we can later revisit which data results in which model. For our case, the data is obtained from Alibaba Cloud OSS. If you are familiar with AWS S3, OSS is what S3 in alibaba cloud platform is called.</p>
+<p>To start, let’s create the file to hold our download logic.</p>
+<p><code>touch nyc_airbnb/get_data.py</code></p>
+<p>Open this file and let’s put in our logic there.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br></pre></td><td class="code"><pre><span class="line"># ./nyc_airbnb/get_data.py</span><br><span class="line"> </span><br><span class="line">import argparse</span><br><span class="line">import logging</span><br><span class="line">import os</span><br><span class="line">import sys</span><br><span class="line">import tempfile</span><br><span class="line">import oss2</span><br><span class="line">import pandas as pd</span><br><span class="line">import wandb</span><br><span class="line"> </span><br><span class="line">sys.path.append(&quot;..&quot;)</span><br><span class="line">from nyc_airbnb.utils.base_runner import BaseRunner</span><br><span class="line"> </span><br><span class="line">logging.basicConfig(</span><br><span class="line">   level=logging.INFO,</span><br><span class="line">   format=&quot;%(asctime)-15s %(levelname)s - %(message)s&quot;)</span><br><span class="line">logger = logging.getLogger()</span><br><span class="line">logger.info(sys.path)</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">class GetOSSDataRunner(BaseRunner):</span><br><span class="line">   def __init__(self,</span><br><span class="line">                wandb_run,</span><br><span class="line">                artifact_name,</span><br><span class="line">                artifact_type,</span><br><span class="line">                artifact_description):</span><br><span class="line">       super().__init__(wandb_run)</span><br><span class="line">       self.artifact_name = artifact_name</span><br><span class="line">       self.artifact_type = artifact_type</span><br><span class="line">       self.artifact_description = artifact_description</span><br><span class="line"> </span><br><span class="line">   def get_oss_data(self,</span><br><span class="line">                    bucket,</span><br><span class="line">                    object_path,</span><br><span class="line">                    local_directory):</span><br><span class="line">       self.wandb_run.config.update(&#123;</span><br><span class="line">           &#x27;bucket&#x27;: bucket,</span><br><span class="line">           &#x27;object-path&#x27;: object_path</span><br><span class="line">       &#125;)</span><br><span class="line"> </span><br><span class="line">       # Setup OSS Connection</span><br><span class="line">       logger.info(&quot;Connecting to Aliyun&quot;)</span><br><span class="line">       auth = oss2.Auth(</span><br><span class="line">           os.environ[&#x27;OSS_ACCESS_KEY_ID&#x27;],</span><br><span class="line">           os.environ[&#x27;OSS_ACCESS_KEY_SECRET&#x27;]</span><br><span class="line">       )</span><br><span class="line">       bucket = oss2.Bucket(</span><br><span class="line">           auth,</span><br><span class="line">           &#x27;https://oss-ap-southeast-5.aliyuncs.com&#x27;,</span><br><span class="line">           bucket</span><br><span class="line">       )</span><br><span class="line"> </span><br><span class="line">       object_list = []</span><br><span class="line">       for obj in oss2.ObjectIteratorV2(bucket, prefix=object_path):</span><br><span class="line">           object_list.append(obj.key)</span><br><span class="line"> </span><br><span class="line">       # Check exported file in OSS</span><br><span class="line">       try:</span><br><span class="line">           assert len(object_list) &lt;= 2</span><br><span class="line">       except AssertionError as err:</span><br><span class="line">           logger.error(&#x27;Expect OSS path to contain only 1 file&#x27;)</span><br><span class="line">           raise err</span><br><span class="line"> </span><br><span class="line">       object_key = object_list[-1]</span><br><span class="line"> </span><br><span class="line">       logger.info(&quot;Downloading object from OSS&quot;)</span><br><span class="line">       temp_filename = os.path.join(local_directory, &#x27;csv_file.csv&#x27;)</span><br><span class="line">       bucket.get_object_to_file(object_key, temp_filename)</span><br><span class="line"> </span><br><span class="line">       df = pd.read_csv(temp_filename)</span><br><span class="line"> </span><br><span class="line">       parquet_filename = str(f&#x27;&#123;local_directory&#125;/&#123;self.artifact_name&#125;&#x27;)</span><br><span class="line">       logger.info(&quot;Exporting pandas dataframe to %s&quot; % parquet_filename)</span><br><span class="line">       df.to_parquet(</span><br><span class="line">           parquet_filename,</span><br><span class="line">           index=False,</span><br><span class="line">           engine=&#x27;pyarrow&#x27;,</span><br><span class="line">           compression=&#x27;gzip&#x27;)</span><br><span class="line"> </span><br><span class="line">       return parquet_filename</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">if __name__ == &quot;__main__&quot;:</span><br><span class="line">   # process arguments</span><br><span class="line">   parser = argparse.ArgumentParser(description=&quot;Download URL to a local destination&quot;)</span><br><span class="line">   parser.add_argument(&quot;bucket&quot;, type=str, help=&quot;Name of the sample to download&quot;)</span><br><span class="line">   parser.add_argument(&quot;object_path&quot;, type=str, help=&quot;Name of the sample to download&quot;)</span><br><span class="line">   parser.add_argument(&quot;artifact_name&quot;, type=str, help=&quot;Name for the output artifact&quot;)</span><br><span class="line">   parser.add_argument(&quot;artifact_type&quot;, type=str, help=&quot;Output artifact type.&quot;)</span><br><span class="line">   parser.add_argument(</span><br><span class="line">       &quot;artifact_description&quot;, type=str, help=&quot;A brief description of this artifact&quot;</span><br><span class="line">   )</span><br><span class="line">   args = parser.parse_args()</span><br><span class="line"> </span><br><span class="line">   # apply arguments to run</span><br><span class="line">   runner = GetOSSDataRunner(</span><br><span class="line">       wandb.init(job_type=&quot;download_file&quot;),</span><br><span class="line">       args.artifact_name,</span><br><span class="line">       args.artifact_type,</span><br><span class="line">       args.artifact_description</span><br><span class="line">   )</span><br><span class="line"> </span><br><span class="line">   with tempfile.TemporaryDirectory() as temp_dir:</span><br><span class="line">       LOCAL_FILE = runner.get_oss_data(args.bucket, args.object_path, temp_dir)</span><br><span class="line">       _ = runner.log_artifact(</span><br><span class="line">           args.artifact_name,</span><br><span class="line">           args.artifact_type,</span><br><span class="line">           args.artifact_description,</span><br><span class="line">           LOCAL_FILE</span><br><span class="line">       )</span><br><span class="line"> </span><br><span class="line">   sys.exit(0)</span><br></pre></td></tr></table></figure>
+<p>This looks intimidating but actually simple, we just download our data from a specific OSS bucket with a specific path. We expect that the path should contain only 1 file, and we get that file. To ease our successsive steps, we log this file in <code>parquet</code> format, <code>parquet</code> is columnar file format that is really optimised to store data for analytics purposes.</p>
+<p>To access OSS, we need to use an access key and a secret. To securely use this in a development environment, we can put this info inside the <code>.env</code> file. Create the file in our root directory, and put our alibaba cloud access key and secret there.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># .env</span><br><span class="line">OSS_ACCESS_KEY_ID=s3cr3t                        # aliyun access id - put your own</span><br><span class="line">OSS_ACCESS_KEY_SECRET=s3cr3t                    # aliyun access key - put your own</span><br></pre></td></tr></table></figure>
+<p>We also need to put this parquet file somewhere, we can put this in the machine’s local file system. However we might encounter problems when we are working with huge data volumes, therefore we are going to make use of weight’s and biases (wandb for simplicity). Wandb has many uses, but here we only utilise the artifact store function. Don’t forget to get our wandb access key from <code>https://wandb.ai/authorize</code> and put the value from there into the <code>.env</code> file as well.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line"># .env</span><br><span class="line">...</span><br><span class="line">WANDB_API_KEY=s3cr3t                            # wandb.ai api key - put your own</span><br></pre></td></tr></table></figure>
+
+<p>All of our component steps will interact with wandb, so we need to build this as a shared utility. Create a new file to hold this shared utility.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">mkdir nyc_airbnb/utils</span><br><span class="line">touch nyc_airbnb/utils/base_runner</span><br></pre></td></tr></table></figure>
+
+<p>Open this new file and copy paste the following code.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br></pre></td><td class="code"><pre><span class="line"># ./nyc_airbnb/utils/base_runner</span><br><span class="line">import wandb</span><br><span class="line">import logging</span><br><span class="line">import pandas as pd</span><br><span class="line"></span><br><span class="line">logging.basicConfig(</span><br><span class="line">    level=logging.INFO,</span><br><span class="line">    format=&quot;%(asctime)-15s %(levelname)s - %(message)s&quot;)</span><br><span class="line">logger = logging.getLogger()</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">class BaseRunner:</span><br><span class="line">    def __init__(self, wandb_run):</span><br><span class="line">        self.wandb_run = wandb_run</span><br><span class="line"></span><br><span class="line">    def log_artifact(self,</span><br><span class="line">                     artifact_name: str,</span><br><span class="line">                     artifact_type: str,</span><br><span class="line">                     artifact_description: str,</span><br><span class="line">                     filename: str) -&gt; wandb.Artifact:</span><br><span class="line">        &quot;&quot;&quot;Log the provided local filename as an artifact in W&amp;B, and add the artifact path</span><br><span class="line">        to the MLFlow run so it can be retrieved by subsequent steps in a pipeline</span><br><span class="line">        Args:</span><br><span class="line">            artifact_name: name for the artifact</span><br><span class="line">            artifact_type:</span><br><span class="line">                type for the artifact (just a string like &quot;raw_data&quot;, &quot;clean_data&quot; and so on)</span><br><span class="line">            artifact_description: a brief description of the artifact</span><br><span class="line">            filename: local filename for the artifact</span><br><span class="line">        Returns:</span><br><span class="line">            Wandb artifact object</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        # Log to W&amp;B</span><br><span class="line">        artifact = wandb.Artifact(</span><br><span class="line">            artifact_name,</span><br><span class="line">            type=artifact_type,</span><br><span class="line">            description=artifact_description,</span><br><span class="line">        )</span><br><span class="line">        artifact.add_file(filename)</span><br><span class="line">        self.wandb_run.log_artifact(artifact)</span><br><span class="line">        logger.info(f&quot;Uploading &#123;artifact_name&#125; to Weights &amp; Biases&quot;)</span><br><span class="line"></span><br><span class="line">        # We need to call .wait() method to ensure that artifact transport has completed</span><br><span class="line">        # before we exit this method execution</span><br><span class="line">        if wandb.run.mode == &#x27;online&#x27;:</span><br><span class="line">            artifact.wait()</span><br><span class="line"></span><br><span class="line">        return artifact</span><br><span class="line"></span><br><span class="line">    def log_model(self,</span><br><span class="line">                  artifact_name: str,</span><br><span class="line">                  artifact_type: str,</span><br><span class="line">                  artifact_description: str,</span><br><span class="line">                  model_dir: str) -&gt; wandb.Artifact:</span><br><span class="line">        &quot;&quot;&quot;Log the provided local filename as an artifact in W&amp;B, and add the artifact path</span><br><span class="line">        to the MLFlow run so it can be retrieved by subsequent steps in a pipeline</span><br><span class="line">        Args:</span><br><span class="line">            artifact_name: name for the artifact</span><br><span class="line">            artifact_type:</span><br><span class="line">                type for the artifact (just a string like &quot;raw_data&quot;, &quot;clean_data&quot; and so on)</span><br><span class="line">            artifact_description: a brief description of the artifact</span><br><span class="line">            model_dir: local path for the model directory</span><br><span class="line">        Returns:</span><br><span class="line">            Wandb artifact object</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        # Log to W&amp;B</span><br><span class="line">        artifact = wandb.Artifact(</span><br><span class="line">            artifact_name,</span><br><span class="line">            type=artifact_type,</span><br><span class="line">            description=artifact_description,</span><br><span class="line">        )</span><br><span class="line">        artifact.add_dir(model_dir)</span><br><span class="line">        self.wandb_run.log_artifact(artifact)</span><br><span class="line">        # We need to call .wait() method to ensure that artifact transport has completed</span><br><span class="line">        # before we exit this method execution</span><br><span class="line">        if wandb.run.mode == &#x27;online&#x27;:</span><br><span class="line">            artifact.wait()</span><br><span class="line"></span><br><span class="line">        return artifact</span><br><span class="line"></span><br><span class="line">    def retrieve_dataset_artifact(self, artifact_name) -&gt; pd.DataFrame:</span><br><span class="line">        &quot;&quot;&quot;Retrieve wandb artifact as pandas DataFrame, artifact_name should exist in</span><br><span class="line">        the context of current run. This function will only retrieve dataset artifact,</span><br><span class="line">        not model or any other artifact type.</span><br><span class="line">        Args:</span><br><span class="line">            artifact_name: name for the artifact</span><br><span class="line">        Returns:</span><br><span class="line">            DataFrame representation of the artifact</span><br><span class="line">        &quot;&quot;&quot;</span><br><span class="line">        artifact_local_path = self.wandb_run.use_artifact(artifact_name).file()</span><br><span class="line"></span><br><span class="line">        try:</span><br><span class="line">            data = pd.read_parquet(artifact_local_path)</span><br><span class="line">        except FileNotFoundError as err:</span><br><span class="line">            logger.error(f&quot;&#123;artifact_name&#125; is not found&quot;)</span><br><span class="line">            raise err</span><br><span class="line"></span><br><span class="line">        return data</span><br></pre></td></tr></table></figure>
+<p>Now we are ready to set this up into our main entry point. Let’s open the <code>MLproject</code> file and put a new entry point.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br></pre></td><td class="code"><pre><span class="line"># ./MLproject</span><br><span class="line">...</span><br><span class="line">entry_points:</span><br><span class="line"> main:</span><br><span class="line">   ...</span><br><span class="line">   ...</span><br><span class="line"> get_data:</span><br><span class="line">   parameters:</span><br><span class="line">     bucket:</span><br><span class="line">       description: OSS bucket where data is stored</span><br><span class="line">       type: string</span><br><span class="line">     object_path:</span><br><span class="line">       description: OSS object of dataset</span><br><span class="line">       type: string</span><br><span class="line">     artifact_name:</span><br><span class="line">       description: Name for the output artifact</span><br><span class="line">       type: string</span><br><span class="line">     artifact_type:</span><br><span class="line">       description: Type of the output artifact. This will be used to categorize the artifact in the W&amp;B interface</span><br><span class="line">       type: string</span><br><span class="line">     artifact_description:</span><br><span class="line">       description: A brief description of the output artifact</span><br><span class="line">       type: string</span><br><span class="line">   command: &quot;python nyc_airbnb/get_data.py</span><br><span class="line">       &#123;bucket&#125;</span><br><span class="line">       &#123;object_path&#125;</span><br><span class="line">       &#123;artifact_name&#125;</span><br><span class="line">       &#123;artifact_type&#125;</span><br><span class="line">       &#123;artifact_description&#125;&quot;</span><br></pre></td></tr></table></figure>
+<p>Now open <code>main.py</code> and let’s call our new entry point from the main entry point.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br></pre></td><td class="code"><pre><span class="line"># main.py</span><br><span class="line">import json</span><br><span class="line"> </span><br><span class="line">import mlflow</span><br><span class="line">import logging</span><br><span class="line">import hydra</span><br><span class="line">import os</span><br><span class="line">import tempfile</span><br><span class="line"> </span><br><span class="line">from dotenv import load_dotenv</span><br><span class="line">from omegaconf import DictConfig</span><br><span class="line"> </span><br><span class="line">load_dotenv()</span><br><span class="line"> </span><br><span class="line">logging.basicConfig(</span><br><span class="line">   level=logging.INFO,</span><br><span class="line">   format=&quot;%(asctime)-15s %(levelname)s - %(message)s&quot;)</span><br><span class="line">logger = logging.getLogger()</span><br><span class="line"> </span><br><span class="line">_steps = [</span><br><span class="line">   &quot;download&quot;</span><br><span class="line">]</span><br><span class="line"> </span><br><span class="line"> </span><br><span class="line">@hydra.main(config_name=&#x27;config&#x27;)</span><br><span class="line">def go(config: DictConfig):</span><br><span class="line">   # Env preparation</span><br><span class="line">   os.environ[&quot;WANDB_PROJECT&quot;] = config[&quot;main&quot;][&quot;project_name&quot;]</span><br><span class="line">   os.environ[&quot;WANDB_RUN_GROUP&quot;] = config[&quot;main&quot;][&quot;experiment_name&quot;]</span><br><span class="line"> </span><br><span class="line">   # Steps to execute</span><br><span class="line">   steps_par = config[&#x27;main&#x27;][&#x27;steps&#x27;]</span><br><span class="line">   active_steps = steps_par.split(&quot;,&quot;) if steps_par != &quot;all&quot; else _steps</span><br><span class="line"> </span><br><span class="line">   with tempfile.TemporaryDirectory() as tmp_dir:</span><br><span class="line"> </span><br><span class="line">       if &quot;download&quot; in active_steps:</span><br><span class="line">           _ = mlflow.run(</span><br><span class="line">               hydra.utils.get_original_cwd(),</span><br><span class="line">               &quot;get_data&quot;,</span><br><span class="line">               parameters=&#123;</span><br><span class="line">                   &quot;bucket&quot;: config[&quot;data&quot;][&quot;bucket&quot;],</span><br><span class="line">                   &quot;object_path&quot;: f&quot;&#123;config[&#x27;data&#x27;][&#x27;object&#x27;]&#125;&quot;,</span><br><span class="line">                   &quot;artifact_name&quot;: f&quot;&#123;config[&#x27;data&#x27;][&#x27;raw_data&#x27;]&#125;&quot;,</span><br><span class="line">                   &quot;artifact_type&quot;: &quot;raw_data&quot;,</span><br><span class="line">                   &quot;artifact_description&quot;: &quot;Raw dataset from data store&quot;</span><br><span class="line">               &#125;</span><br><span class="line">           )</span><br><span class="line"> </span><br><span class="line">if __name__ == &#x27;__main__&#x27;:</span><br><span class="line">   go()</span><br></pre></td></tr></table></figure>
+<p>We call <code>mlflow.run()</code> if <code>download</code> is called. We pass all arguments needed by <code>get_data</code> as parameters of <code>mlflow.run()</code>. These arguments are retrieved from <code>config.yaml</code> that is currently empty, so our next step is to make this config file.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line"># ./config.yaml</span><br><span class="line">main:</span><br><span class="line"> project_name: &quot;housing_price&quot;</span><br><span class="line"> experiment_name: &quot;torch_lasso_model&quot;</span><br><span class="line"> steps: all</span><br><span class="line">data:</span><br><span class="line"> bucket: &quot;dana-mle&quot;</span><br><span class="line"> object: &quot;dataset/full_data/&quot;</span><br></pre></td></tr></table></figure>
+<p>The Hydra library will read this configuration, parse it as python Dict, and we consume this Dict within our <code>go()</code> function.</p>
+<h3 id="Test-run"><a href="#Test-run" class="headerlink" title="Test run"></a>Test run</h3><p>Now we have implemented the skeleton with a single component to download our data. To test run it, simply execute this CLI command.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mlflow run nyc_airbnb</span><br></pre></td></tr></table></figure>
+<p>mlflow will create a new virtual environment, and run the first step <code>download</code> to get our data based on the <code>config.yaml</code> file. We can see the retrieved data by logging in to the wandb.ai dashboard.</p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/iahsanujunda">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#Implementation"><span class="toc-number">1.</span> <span class="toc-text">Implementation</span></a><ol class="toc-child"><li class="toc-item toc-level-3"><a class="toc-link" href="#Initial-setup"><span class="toc-number">1.1.</span> <span class="toc-text">Initial setup</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Develop-main-entry-point"><span class="toc-number">1.2.</span> <span class="toc-text">Develop main entry point</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Develop-get-data-step"><span class="toc-number">1.3.</span> <span class="toc-text">Develop get_data step</span></a></li><li class="toc-item toc-level-3"><a class="toc-link" href="#Test-run"><span class="toc-number">1.4.</span> <span class="toc-text">Test run</span></a></li></ol></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&text=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&is_video=false&description=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component&body=Check out this article: https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&title=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&name=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component&description=&lt;p&gt;MLflow is a very nice tool to handle our MLOps needs. It covers several important features for doing MLOps, namely tracking server, model registry, and source code packaging. Here we are going to focus on &lt;a href=&#34;https://mlflow.org/docs/latest/projects.html&#34;&gt;MLFlow Projects&lt;/a&gt;, the source code packaging feature that can help us develop a reproducible machine learning pipeline.&lt;/p&gt;
+&lt;p&gt;MLFlow projects enable us to run source codes in a consistent way by encapsulating the runtime environment together with the source code, so that we can develop our source code on OSX, and have it run on linux with the same reproducible result, if we so need.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://iahsanujunda.github.io/posts/20210802/MLOps-Part-1-Intro-to-MLflow-Project-and-setting-up-our-first-step/&t=MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    Izzuddin Ahsanujunda
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/iahsanujunda">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>

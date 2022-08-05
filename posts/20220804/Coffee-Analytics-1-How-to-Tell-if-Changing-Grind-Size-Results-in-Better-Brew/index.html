@@ -1,0 +1,354 @@
+<!DOCTYPE html>
+<html lang=en>
+<head>
+    <!-- so meta -->
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="HandheldFriendly" content="True">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=5" />
+    <meta name="description" content="It’s now been two years since I seriously started making my own coffee. COVID-19 pandemic really brings out my inner barista. Before the pandemic and the ensuing restriction hits, I always buy my coff">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew">
+<meta property="og:url" content="https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/">
+<meta property="og:site_name" content="Izzuddin Ahsanujunda Blog">
+<meta property="og:description" content="It’s now been two years since I seriously started making my own coffee. COVID-19 pandemic really brings out my inner barista. Before the pandemic and the ensuing restriction hits, I always buy my coff">
+<meta property="og:locale" content="en_US">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1jvFRi9RrL2jQ9WPFh4QHgsN8fS3R1KBq">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1ai2dU-VSN9RHlxlYR0CZDrXR6G6Xf4Ng">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=19U99HV3nJPLmHbszx-59o7cLavQdXLJj">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1Hg-57AbqcmTc8KPm-PvDH44r2riILKH2">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1MfTTDjhwr3h1jTtymwBSq5SR2IqksLS1">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1OlqX7isPUUKIGVruJ3fjjfzSjPztzOj3">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1F3MsH5vTaWivFZ-1PiMY6R0d01IbOjKJ">
+<meta property="og:image" content="https://drive.google.com/uc?export=view&id=1lG4-1Y-qnK154S7WGCihaZ4BqRvBNOY0">
+<meta property="article:published_time" content="2022-08-04T14:53:09.000Z">
+<meta property="article:modified_time" content="2022-08-05T15:46:45.037Z">
+<meta property="article:author" content="Izzuddin Ahsanujunda">
+<meta property="article:tag" content="data science, data analysis, machine learning, software development, data engineering">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:image" content="https://drive.google.com/uc?export=view&id=1jvFRi9RrL2jQ9WPFh4QHgsN8fS3R1KBq">
+    
+    
+      
+        
+          <link rel="shortcut icon" href="/images/favicon.ico">
+        
+      
+      
+        
+          <link rel="icon" type="image/png" href="/images/android-chrome-192x192.png" sizes="192x192">
+        
+      
+      
+        
+          <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
+        
+      
+    
+    <!-- title -->
+    <title>Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew</title>
+    <!-- styles -->
+    
+<link rel="stylesheet" href="/css/style.css">
+
+    <!-- persian styles -->
+    
+    <!-- rss -->
+    
+    
+	<!-- mathjax -->
+	
+		<script type="text/x-mathjax-config">
+		  MathJax.Hub.Config({
+			tex2jax: {
+			  skipTags: ['script', 'noscript', 'style', 'textarea', 'pre'],
+			  inlineMath: [['$','$']]
+			}
+		  });
+		</script>
+		<script src='https://cdnjs.cloudflare.com/ajax/libs/mathjax/2.7.5/latest.js?config=TeX-MML-AM_CHTML' async></script>
+	
+<meta name="generator" content="Hexo 6.2.0"></head>
+
+<body class="max-width mx-auto px3 ltr">
+    
+      <div id="header-post">
+  <a id="menu-icon" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="menu-icon-tablet" href="#" aria-label="Menu"><i class="fas fa-bars fa-lg"></i></a>
+  <a id="top-icon-tablet" href="#" aria-label="Top" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');" style="display:none;"><i class="fas fa-chevron-up fa-lg"></i></a>
+  <span id="menu">
+    <span id="nav">
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/iahsanujunda">Projects</a></li><!--
+     -->
+      </ul>
+    </span>
+    <br/>
+    <span id="actions">
+      <ul>
+        
+        
+        <li><a class="icon" aria-label="Next post" href="/posts/20220801/How-to-Embed-Images-Hosted-on-Google-Drive/"><i class="fas fa-chevron-right" aria-hidden="true" onmouseover="$('#i-next').toggle();" onmouseout="$('#i-next').toggle();"></i></a></li>
+        
+        <li><a class="icon" aria-label="Back to top" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up" aria-hidden="true" onmouseover="$('#i-top').toggle();" onmouseout="$('#i-top').toggle();"></i></a></li>
+        <li><a class="icon" aria-label="Share post" href="#"><i class="fas fa-share-alt" aria-hidden="true" onmouseover="$('#i-share').toggle();" onmouseout="$('#i-share').toggle();" onclick="$('#share').toggle();return false;"></i></a></li>
+      </ul>
+      <span id="i-prev" class="info" style="display:none;">Previous post</span>
+      <span id="i-next" class="info" style="display:none;">Next post</span>
+      <span id="i-top" class="info" style="display:none;">Back to top</span>
+      <span id="i-share" class="info" style="display:none;">Share post</span>
+    </span>
+    <br/>
+    <div id="share" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/"><i class="fab fa-facebook " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&text=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-twitter " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-linkedin " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&is_video=false&description=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-pinterest " aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew&body=Check out this article: https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/"><i class="fas fa-envelope " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-get-pocket " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-reddit " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-stumbleupon " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-digg " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&name=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew&description=&lt;p&gt;It’s now been two years since I seriously started making my own coffee. COVID-19 pandemic really brings out my inner barista. Before the pandemic and the ensuing restriction hits, I always buy my coffee. But now I weigh my coffee, hand grind beans right before brewing, 3D print custom tools to help me brew better, and watched &lt;a href=&#34;https://www.youtube.com/channel/UCMb0O2CdPBNi-QqPk5T3gsQ&#34;&gt;James Hoffmann&lt;/a&gt; videos to know the latest poison to buy.&lt;/p&gt;
+&lt;p&gt;When I want to brew something for both me and my wife, I usually go with a moka pot, because it is one that both of us will always enjoy. I can brew v60 but my wife does not always like the taste of v60 coffee, because my v60 brewing is inconsistent. V60 is a brewer that requires dedication. There are a lot more factors that are involved in making v60 coffee compared to moka pot, so it is really easy to introduce unintended factors into my v60 brewing.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://drive.google.com/uc?export=view&amp;id=1jvFRi9RrL2jQ9WPFh4QHgsN8fS3R1KBq&#34; alt=&#34;a moka pot&#34;&gt;&lt;/p&gt;
+&lt;p&gt;With the moka pot, I usually have a standard set of configurations that both of us mostly enjoy. But a problem arose when one day I changed one configuration, a smaller grind size, in order to have a stronger cup. When I made it, it was okay, the cup is indeed a bit more bitter but also more flavorful. But when my wife makes it with the new configuration, it results in a coffee that has barely any foam and it is not as bitter as it should. At first I discarded it as her using a different config, but then I also managed to get a similar result with hers even though not always.&lt;/p&gt;
+&lt;p&gt;This piqued my curiosity. Does the finer grind make a more inconsistent brew? If so, how should I debug this.&lt;/p&gt;"><i class="fab fa-tumblr " aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&t=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-hacker-news " aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+    <div id="toc">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-premise"><span class="toc-number">1.</span> <span class="toc-text">The premise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-experiment"><span class="toc-number">2.</span> <span class="toc-text">The experiment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-and-Further-Work"><span class="toc-number">3.</span> <span class="toc-text">Conclusion and Further Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">4.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+  </span>
+</div>
+
+    
+    <div class="content index py4">
+        
+        <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header>
+    
+    <h1 class="posttitle" itemprop="name headline">
+        Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew
+    </h1>
+
+
+
+    <div class="meta">
+      <span class="author" itemprop="author" itemscope itemtype="http://schema.org/Person">
+        <span itemprop="name">Izzuddin Ahsanujunda</span>
+      </span>
+      
+    <div class="postdate">
+      
+        <time datetime="2022-08-04T14:53:09.000Z" itemprop="datePublished">2022-08-04</time>
+        
+      
+    </div>
+
+
+      
+
+      
+
+    </div>
+  </header>
+  
+
+  <div class="content" itemprop="articleBody">
+    <p>It’s now been two years since I seriously started making my own coffee. COVID-19 pandemic really brings out my inner barista. Before the pandemic and the ensuing restriction hits, I always buy my coffee. But now I weigh my coffee, hand grind beans right before brewing, 3D print custom tools to help me brew better, and watched <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCMb0O2CdPBNi-QqPk5T3gsQ">James Hoffmann</a> videos to know the latest poison to buy.</p>
+<p>When I want to brew something for both me and my wife, I usually go with a moka pot, because it is one that both of us will always enjoy. I can brew v60 but my wife does not always like the taste of v60 coffee, because my v60 brewing is inconsistent. V60 is a brewer that requires dedication. There are a lot more factors that are involved in making v60 coffee compared to moka pot, so it is really easy to introduce unintended factors into my v60 brewing.</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1jvFRi9RrL2jQ9WPFh4QHgsN8fS3R1KBq" alt="a moka pot"></p>
+<p>With the moka pot, I usually have a standard set of configurations that both of us mostly enjoy. But a problem arose when one day I changed one configuration, a smaller grind size, in order to have a stronger cup. When I made it, it was okay, the cup is indeed a bit more bitter but also more flavorful. But when my wife makes it with the new configuration, it results in a coffee that has barely any foam and it is not as bitter as it should. At first I discarded it as her using a different config, but then I also managed to get a similar result with hers even though not always.</p>
+<p>This piqued my curiosity. Does the finer grind make a more inconsistent brew? If so, how should I debug this.</p>
+<span id="more"></span>
+<h2 id="The-premise"><a href="#The-premise" class="headerlink" title="The premise"></a>The premise</h2><p>Before I get into analysing anything, I should learn about some missing particulars of my coffee-brewing, to make sure that the data and therefore any potential conclusions I make is not misguided by my own ignorance.</p>
+<p>Many people take the statement that using grinders, any grinder, result in better tasting coffee. The theory is sound, coffee is hygroscopic [1], meaning it absorbs water from the air, and with it also comes particles and odours. In the bean form, the things we like in a coffee are better protected. The moment the beans are ground, it releases all the coffee goodness into nothingness. By this logic, the shorter the gap between grinding our beans to brewing them, the better[2]. If I pre-ground my coffee from a place that can replicate my coffee grinding levels with a really great grinder, I might not observe the proper effect due to the fact that a lot more coffee goodness has evaporated.</p>
+<p>Next I have to know how a grind size might affect resulting coffee. Quick research allows me to understand that the grind size affects contact time of water with the coffee. Finer ground coffee will let water seep through slower than a coarser ground, practically ‘cooking’ them longer. As with cooking anything, we don’t want to overcook, because things that are overcooked taste unpleasant. When I change my grind size into a smaller one, I increase brewing time and might potentially overbrew them. But sometimes I got good results. Sometimes the resulting coffee is great. So I need to research some more.</p>
+<p>The next research enlightens me on particle uniformity. A uniform ground coffee will result in better tasting coffee because the surface area of each particle that is exposed to water is similar. Imagine boiling two potatoes, one potato having twice the size of the other one. More portion of the smaller potato will be in contact with boiling water and therefore will cook faster than the bigger one. The same principle applies with coffee, if our grinder can not grind uniformly, we will have particles with sizes all over the chart. When we brew these, the smaller particles will ‘cook’ faster, and anything will taste bitter when overcooked. The bigger ones, on the other hand, will be ‘undercooked’ and will taste weak. Our tongue won’t like the combination of overcooked bitterness and undercooked weakness. This might be what happens with me, my grinder loses ability to grind uniformly in lower configuration.</p>
+<h2 id="The-experiment"><a href="#The-experiment" class="headerlink" title="The experiment"></a>The experiment</h2><p>With necessary knowledge obtained, I now have better understanding on what to suspect, how to prove this suspicion, and therefore getting closer to a consistently good tasting coffee.</p>
+<p>The first factor that I will put into my analysis is, of course, grind size.</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1ai2dU-VSN9RHlxlYR0CZDrXR6G6Xf4Ng" alt="my grinder setting"></p>
+<p>This is how to set my grinder setting. I just turn this knob clockwise for finer grind size, counter-clockwise for coarser size. There is a kind of stopper mechanism that will click when I rotate this knob, therefore I usually count the number of clicks to adjust my grind size. If I turn the knob clockwise until it can not move anymore, it is the 0 click position. Then I turn the knob counterclockwise until I hear the first click, it is the 1 click position. My previous configuration is using 12 clicks grind size, the new one is 11 clicks. I will use this as the independent variable.</p>
+<p><img src="https://drive.google.com/uc?export=view&id=19U99HV3nJPLmHbszx-59o7cLavQdXLJj" alt="foam"></p>
+<p>Now how should we measure the effect in our coffee? In my daily brewing, I use one proxy metric: foam quantity. I always associate moka pot coffee with more creamy foam on top as better than one without foam. I assumed that more foam means more flavour extracted. But as I researched about this topic, I understand that it is not always the case. The foam in the moka pot is the result of CO2 trapped inside the beans that gets released during brewing. Because it is gas, it will gradually evaporate into the air instead of getting incorporated into the coffee liquid. We can stir the foam to mix with the coffee liquid, but it will not bind better compared to if it is bound with water in the first place. The coffee liquid goodness comes from water, so we should prefer more water rather than more foam.</p>
+<p>To have a more accurate analysis, I should measure total dissolved particles in my cup of coffee. Professional baristas use a refractometer as part of their routine. Refractometer measures the density of dissolved particles in a water. Better tasting coffee usually has more sugar extracted per unit mass of water. However I don’t currently have access to refractometer, and getting one to satisfy my idle curiosity seems overkill, therefore I am back with measuring foam quantity. My justification is that without access to proper measuring tools, we can focus on what comes out instead of how the taste is like.</p>
+<p>Now we have independent and response variables sorted, we can start collecting data.</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1Hg-57AbqcmTc8KPm-PvDH44r2riILKH2" alt="forms"></p>
+<p>I created a google form to easily organise my data collection. The response I put into this form is conveniently stored in spreadsheet format, so I import them easily when I am ready for analysis.</p>
+<p>Once I have made several batches of coffee, I revisit my spreadsheet and prepare it for analysis.</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1MfTTDjhwr3h1jTtymwBSq5SR2IqksLS1" alt="spread sheet"></p>
+<p>One thing I did is to create a copy of the working sheet. I might want to reuse this form for more experiments, so it is better to work on the copy of the sheet. I then renamed the headers so that I can process them easier in python. I also need to transform the photo I took of the foam into two categories: low amount of foams or high amount of foams. I simply take a look at each image url, and decide if it is the photo of a low amount or high amount.</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1OlqX7isPUUKIGVruJ3fjjfzSjPztzOj3" alt="high amount"></p>
+<center>this is high</center>
+ 
+<p><img src="https://drive.google.com/uc?export=view&id=1F3MsH5vTaWivFZ-1PiMY6R0d01IbOjKJ" alt="low amount"></p>
+<center>this is low</center>
+ 
+<blockquote>
+<p>The column for foam quantity is called crema_level here. I know it is semantically wrong, but it is a term that a lot of people are more familiar with.</p>
+</blockquote>
+<p>Now that I have nicely formatted tabular data. I can easily use the spreadsheet in python for analysis. The python can be easily accessed here: <a target="_blank" rel="noopener" href="https://colab.research.google.com/drive/1IjGnfKwTFgcCaXcBnfFd0Mn27bx-gYtg?usp=sharing">https://colab.research.google.com/drive/1IjGnfKwTFgcCaXcBnfFd0Mn27bx-gYtg?usp=sharing</a></p>
+<p>The data we are dealing with can be presented as a 2x2 contingency table.</p>
+<p><img src="https://drive.google.com/uc?export=view&id=1lG4-1Y-qnK154S7WGCihaZ4BqRvBNOY0" alt="grind vs crema"></p>
+<p>It is tempting to use chi square test for independence for this kind of problem because it test whether or not two variables are independent with each other, if <code>crema_level</code> is dependent with <code>grind_level</code> then changing <code>grind_level</code> will gave us different <code>crema_level</code>. However we can see that it has a low number of observations. Chi square test for independence will give us a p value result that is lower than if we run the same experiment with more observation [3]. To get around this problem, we can use fisher exact test. With the exact test, instead of testing if <code>grind_level</code> is independent with <code>crema_level</code>, we are testing if the probability of getting high <code>crema_level</code> is the same when we use <code>grind_level</code> 11 and 12.</p>
+<figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">H_&#123;0&#125;: probability of getting high crema_level is the same with grind_level 11 and 12.</span><br><span class="line">H_&#123;1&#125;: probability of getting high crema_level is NOT the same with grind_level 11 and 12.</span><br></pre></td></tr></table></figure>
+<p>Running our observation through <code>scipy.stats.fischer_exact</code>, we get a p value of 1.0.</p>
+<h2 id="Conclusion-and-Further-Work"><a href="#Conclusion-and-Further-Work" class="headerlink" title="Conclusion and Further Work"></a>Conclusion and Further Work</h2><p>We got a very high p value that tells us that if the probability of getting high <code>crema_level</code> is the same with grind size 11 and 12, we are going to see results similar to our observation most of the time. So we accept the hypothesis that when changing grind size from 12 to 11, no change in probability of getting high <code>crema_level</code>.</p>
+<p>Preparing for this experiment has given me a better understanding of coffee-brewing. As I collect info and data, I realised some of my initial understanding is flawed, therefore I have to repeat this experiment with improved factors, constants, variables, and treatments. In the next experiment, I could put my coffee bean in individual zipper bags when it was first bought. I currently put my coffee beans in the bag I bought them in. When I do this, the beans that are used in later batches are exposed more to the air, and therefore lose more of their CO2 and other coffee goodness. This might be what hinders our observation.  If I put them in separate bags that contain only enough for one serving, I can keep the bean in a vacuum longer and only expose them to air once I am about to grind them.</p>
+<p>As a fun exercise, I ran the same analysis to see the effect of <code>fire_level</code> and <code>crema_level</code>, the intuition is that <code>fire_level</code> affects how fast water vapour seeps through the coffee bed. Finer grind setting might not be overcooked if the cooking time is fast. The result is surprisingly the same, p value is <code>1.0</code>.</p>
+<h2 id="Reference"><a href="#Reference" class="headerlink" title="Reference"></a>Reference</h2><p>[1] <a target="_blank" rel="noopener" href="https://coffeeaffection.com/coffee-in-freezer/">https://coffeeaffection.com/coffee-in-freezer/</a><br>[2] <a target="_blank" rel="noopener" href="https://youtu.be/bgjvLQu5NlE?t=128">https://youtu.be/bgjvLQu5NlE?t=128</a><br>[3] <a target="_blank" rel="noopener" href="http://www.biostathandbook.com/small.html">http://www.biostathandbook.com/small.html</a><br>[4] <a target="_blank" rel="noopener" href="http://www.biostathandbook.com/fishers.html">http://www.biostathandbook.com/fishers.html</a></p>
+
+  </div>
+</article>
+
+
+
+        
+          <div id="footer-post-container">
+  <div id="footer-post">
+
+    <div id="nav-footer" style="display: none">
+      <ul>
+         
+          <li><a href="/">Home</a></li>
+         
+          <li><a href="/about/">About</a></li>
+         
+          <li><a href="/archives/">Writing</a></li>
+         
+          <li><a target="_blank" rel="noopener" href="http://github.com/iahsanujunda">Projects</a></li>
+        
+      </ul>
+    </div>
+
+    <div id="toc-footer" style="display: none">
+      <ol class="toc"><li class="toc-item toc-level-2"><a class="toc-link" href="#The-premise"><span class="toc-number">1.</span> <span class="toc-text">The premise</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#The-experiment"><span class="toc-number">2.</span> <span class="toc-text">The experiment</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Conclusion-and-Further-Work"><span class="toc-number">3.</span> <span class="toc-text">Conclusion and Further Work</span></a></li><li class="toc-item toc-level-2"><a class="toc-link" href="#Reference"><span class="toc-number">4.</span> <span class="toc-text">Reference</span></a></li></ol>
+    </div>
+
+    <div id="share-footer" style="display: none">
+      <ul>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.facebook.com/sharer.php?u=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/"><i class="fab fa-facebook fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://twitter.com/share?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&text=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-twitter fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.linkedin.com/shareArticle?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-linkedin fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://pinterest.com/pin/create/bookmarklet/?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&is_video=false&description=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-pinterest fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" href="mailto:?subject=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew&body=Check out this article: https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/"><i class="fas fa-envelope fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://getpocket.com/save?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-get-pocket fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://reddit.com/submit?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-reddit fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.stumbleupon.com/submit?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-stumbleupon fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://digg.com/submit?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&title=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-digg fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="http://www.tumblr.com/share/link?url=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&name=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew&description=&lt;p&gt;It’s now been two years since I seriously started making my own coffee. COVID-19 pandemic really brings out my inner barista. Before the pandemic and the ensuing restriction hits, I always buy my coffee. But now I weigh my coffee, hand grind beans right before brewing, 3D print custom tools to help me brew better, and watched &lt;a href=&#34;https://www.youtube.com/channel/UCMb0O2CdPBNi-QqPk5T3gsQ&#34;&gt;James Hoffmann&lt;/a&gt; videos to know the latest poison to buy.&lt;/p&gt;
+&lt;p&gt;When I want to brew something for both me and my wife, I usually go with a moka pot, because it is one that both of us will always enjoy. I can brew v60 but my wife does not always like the taste of v60 coffee, because my v60 brewing is inconsistent. V60 is a brewer that requires dedication. There are a lot more factors that are involved in making v60 coffee compared to moka pot, so it is really easy to introduce unintended factors into my v60 brewing.&lt;/p&gt;
+&lt;p&gt;&lt;img src=&#34;https://drive.google.com/uc?export=view&amp;id=1jvFRi9RrL2jQ9WPFh4QHgsN8fS3R1KBq&#34; alt=&#34;a moka pot&#34;&gt;&lt;/p&gt;
+&lt;p&gt;With the moka pot, I usually have a standard set of configurations that both of us mostly enjoy. But a problem arose when one day I changed one configuration, a smaller grind size, in order to have a stronger cup. When I made it, it was okay, the cup is indeed a bit more bitter but also more flavorful. But when my wife makes it with the new configuration, it results in a coffee that has barely any foam and it is not as bitter as it should. At first I discarded it as her using a different config, but then I also managed to get a similar result with hers even though not always.&lt;/p&gt;
+&lt;p&gt;This piqued my curiosity. Does the finer grind make a more inconsistent brew? If so, how should I debug this.&lt;/p&gt;"><i class="fab fa-tumblr fa-lg" aria-hidden="true"></i></a></li>
+  <li><a class="icon" target="_blank" rel="noopener" href="https://news.ycombinator.com/submitlink?u=https://iahsanujunda.github.io/posts/20220804/Coffee-Analytics-1-How-to-Tell-if-Changing-Grind-Size-Results-in-Better-Brew/&t=Coffee Analytics 1 - How to Tell if Changing Grind Size Results in Better Brew"><i class="fab fa-hacker-news fa-lg" aria-hidden="true"></i></a></li>
+</ul>
+
+    </div>
+
+    <div id="actions-footer">
+        <a id="menu" class="icon" href="#" onclick="$('#nav-footer').toggle();return false;"><i class="fas fa-bars fa-lg" aria-hidden="true"></i> Menu</a>
+        <a id="toc" class="icon" href="#" onclick="$('#toc-footer').toggle();return false;"><i class="fas fa-list fa-lg" aria-hidden="true"></i> TOC</a>
+        <a id="share" class="icon" href="#" onclick="$('#share-footer').toggle();return false;"><i class="fas fa-share-alt fa-lg" aria-hidden="true"></i> Share</a>
+        <a id="top" style="display:none" class="icon" href="#" onclick="$('html, body').animate({ scrollTop: 0 }, 'fast');"><i class="fas fa-chevron-up fa-lg" aria-hidden="true"></i> Top</a>
+    </div>
+
+  </div>
+</div>
+
+        
+        <footer id="footer">
+  <div class="footer-left">
+    Copyright &copy;
+    
+    
+    2020-2022
+    Izzuddin Ahsanujunda
+  </div>
+  <div class="footer-right">
+    <nav>
+      <ul>
+        <!--
+       --><li><a href="/">Home</a></li><!--
+     --><!--
+       --><li><a href="/about/">About</a></li><!--
+     --><!--
+       --><li><a href="/archives/">Writing</a></li><!--
+     --><!--
+       --><li><a target="_blank" rel="noopener" href="http://github.com/iahsanujunda">Projects</a></li><!--
+     -->
+      </ul>
+    </nav>
+  </div>
+</footer>
+
+    </div>
+    <!-- styles -->
+
+
+
+  <link rel="preload" as="style" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" crossorigin="anonymous" onload="this.onload=null;this.rel='stylesheet'"/>
+
+
+    <!-- jquery -->
+ 
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" crossorigin="anonymous"></script> 
+
+
+
+
+<!-- clipboard -->
+
+  
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/clipboard.js/2.0.7/clipboard.min.js" crossorigin="anonymous"></script> 
+  
+  <script type="text/javascript">
+  $(function() {
+    // copy-btn HTML
+    var btn = "<span class=\"btn-copy tooltipped tooltipped-sw\" aria-label=\"Copy to clipboard!\">";
+    btn += '<i class="far fa-clone"></i>';
+    btn += '</span>'; 
+    // mount it!
+    $(".highlight table").before(btn);
+    var clip = new ClipboardJS('.btn-copy', {
+      text: function(trigger) {
+        return Array.from(trigger.nextElementSibling.querySelectorAll('.code')).reduce((str,it)=>str+it.innerText+'\n','')
+      }
+    });
+    clip.on('success', function(e) {
+      e.trigger.setAttribute('aria-label', "Copied!");
+      e.clearSelection();
+    })
+  })
+  </script>
+
+
+<script src="/js/main.js"></script>
+
+<!-- search -->
+
+<!-- Google Analytics -->
+
+<!-- Baidu Analytics -->
+
+<!-- Cloudflare Analytics -->
+
+<!-- Umami Analytics -->
+
+<!-- Disqus Comments -->
+
+<!-- utterances Comments -->
+
+</body>
+</html>
