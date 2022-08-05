@@ -22,7 +22,7 @@ touch nyc_airbnb/split_train_test.py
  
 Just like `nyc_airbnb/get_data.py`, here we will build the logic to split our full dataset into a training and testing set. We do this early to safeguard our model from information leakage. Open the new file and put the following code into it.
  
-```
+```python
 # ./nyc_airbnb/split_train_test.py
 import argparse
 import logging
@@ -122,7 +122,7 @@ The logic here is quite simple, we listen for arguments of which artifact name f
  
 Now we have to strap this into `MLproject`.
  
-```
+```yaml
 #./MLproject
 ...
 ...
@@ -159,7 +159,7 @@ entry_points:
 With `MLproject` entry point set, we can now call this from `main.py` with values retrieved from `config.yaml`.
  
  
-```
+```python
 # ./main.py
 ...
 ...
@@ -187,7 +187,7 @@ _steps = [
 ...
 ```
  
-```
+```yaml
 ./config.yaml
 ...
 ...
@@ -212,13 +212,13 @@ After the run is finished, check our wandb dashboard and see if a new artifact c
  
 Let's put in the logic for training our model. Create a new file for this.
  
-```
+```shell
 touch nyc_airbnb/train.py
 ```
  
 And paste in the following code.
  
-```
+```python
 # ./nyc_airbnb/train.py
  
 import argparse
@@ -411,7 +411,7 @@ touch nyc_airbnb/utils/pipeline.py
  
 Write the following code into the new file.
  
-```
+```python
 # ./nyc_airbnb/utils/pipeline.py
 def get_inference_pipeline(rf_config, max_tfidf_features):
    # Let's handle the categorical features first
@@ -506,7 +506,7 @@ As we can see, we build the steps in a declarative way, so we can change any par
  
 Now that we have created the entry point for training, we just have to call it from our main entry point. Let's start by making the entry point for training in our MLproject.
  
-```
+```yaml
 #./MLproject
 ...
 ...
@@ -558,7 +558,7 @@ entry_points:
  
 Now we can call this from `main.py`.
  
-```
+```python
 # ./main.py
 ...
 ...
@@ -625,7 +625,7 @@ modeling:
  
 Now we have everything ready to test run our training step. Same as previous example, we can run using mlflow cli.
  
-```
+```shell
 mlflow run nyc_airbnb/ -P steps=train
 ```
  
