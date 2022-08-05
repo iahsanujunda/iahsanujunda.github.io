@@ -15,7 +15,6 @@ direction: ltr
 # languages/*.yml
 nav:
   home: /
-  about: /about/
   articles: /archives/
   projects: http://github.com/iahsanujunda
 
