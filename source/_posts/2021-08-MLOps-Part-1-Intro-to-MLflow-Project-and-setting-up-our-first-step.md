@@ -563,5 +563,10 @@ Now we have implemented the skeleton with a single component to download our dat
 mlflow run .
 ```
  
-mlflow will create a new virtual environment, and run the first step `download` to get our data based on the `config.yaml` file. We can see the retrieved data by logging in to the wandb.ai dashboard.
+mlflow will create a new virtual environment, and run the first step `download` to get our data based on the `config.yaml` file. We can see the retrieved data by logging in to the wandb.ai dashboard and open artifact.
 
+![wandb.ai artifact](https://drive.google.com/uc?export=view&id=15HAAfWRx1NUl1sLCU-tiJzP0e2OR-s-p)
+
+We can see that our dataset has now been logged in wandb and can be used for subsequent steps.
+
+The state of our source code can also be checked from [this github repository](https://github.com/iahsanujunda/nyc_airbnb_pipeline) on branch named `part-1`.
