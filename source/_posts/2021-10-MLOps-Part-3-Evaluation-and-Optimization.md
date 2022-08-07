@@ -346,8 +346,161 @@ We're half way through, let's open `MLproject` and add new entry point for evalu
 
 Now we are going to call this new entry point from our `main.py`
 
-```python
+> ./main.py
+> 
+> ```python
+> import json
+> import mlflow
+> import tempfile
+> import os
+> import hydra
+> from omegaconf import DictConfig
+> from dotenv import load_dotenv
+> 
+> load_dotenv()
+> ```
+> ```python
+> _steps = [
+>     'download',
+>     'split',
+>     'train',
+>     'evaluate'
+> ]
+> ```
+> ``` python
+> 
+> 
+> # This decorator automatically reads in the configuration
+> @hydra.main(config_name='config')
+> def go(config: DictConfig):
+>     # Setup the wandb experiment. All runs will be grouped under this name
+>     os.environ["WANDB_PROJECT"] = config["main"]["project_name"]
+>     os.environ["WANDB_RUN_GROUP"] = config["main"]["experiment_name"]
+> 
+>     # Steps to execute
+>     steps_par = config['main']['steps']
+>     active_steps = steps_par.split(",") if steps_par != "all" else _steps
+> 
+>     # Move to a temporary directory
+>     with tempfile.TemporaryDirectory() as tmp_dir:
+>         if "download" in active_steps:
+>             # Download file and load in W&B
+>             _ = mlflow.run(
+>                 hydra.utils.get_original_cwd(),
+>                 "get_data",
+>                 parameters={
+>                     "bucket": config["data"]["bucket"],
+>                     "object_path": f"{config['data']['object']}",
+>                     "artifact_name": f"{config['data']['raw_data']}",
+>                     "artifact_type": "raw_data",
+>                     "artifact_description": "Raw dataset from data store"
+>                 }
+>             )
+> 
+>         if "split" in active_steps:
+>             _ = mlflow.run(
+>                 hydra.utils.get_original_cwd(),
+>                 "split",
+>                 parameters={
+>                     "input_artifact": f"{config['data']['raw_data']}:latest",
+>                     "test_size": config['modeling']['test_size'],
+>                     "random_seed": config['modeling']['random_seed'],
+>                     "stratify_by": config['modeling']['stratify_by'],
+>                 }
+>             )
+> 
+>         if "train" in active_steps:
+>             # NOTE: we need to serialize the random forest configuration into JSON
+>             rf_config = os.path.abspath("rf_config.json")
+>             with open(rf_config, "w+") as fp:
+>                 json.dump(dict(config["modeling"]["random_forest"].items()), fp)  # DO NOT TOUCH
+>             # NOTE: use the rf_config we just created as the rf_config parameter for the train_random_forest
+>             _ = mlflow.run(
+>                 os.path.join(hydra.utils.get_original_cwd()),
+>                 "train",
+>                 parameters={
+>                     "label": config["data"]["label"],
+>                     "trainval_artifact": f"{config['data']['training_data']}:latest",
+>                     "val_size": config["modeling"]["val_size"],
+>                     "random_seed": config["modeling"]["random_seed"],
+>                     "stratify_by": config["modeling"]["stratify_by"],
+>                     "rf_config": rf_config,
+>                     "max_tfidf_features": config["modeling"]["max_tfidf_features"],
+>                     "output_artifact": config["main"]["experiment_name"],
+>                 },
+>             )
+> ```
+> ```python
+>         if "evaluate" in active_steps:
+>             _ = mlflow.run(
+>                 os.path.join(hydra.utils.get_original_cwd()),
+>                 "test",
+>                 parameters={
+>                     "test_model": f'{config["modeling"]["test_model"]}',
+>                     "test_dataset": config['data']['test_data'],
+>                     "label": config['data']['label_col'],
+>                 },
+>             )
+> 
+> 
+> if __name__ == "__main__":
+>     go()
+> ```
+
+Now that we can call `evaluate` from `main` entry point, we just need to add configuration that will be passed in to `evaluate` step.
+
+> ./config.yaml
+> 
+> ```yaml
+> main:
+>   project_name: "nyc_airbnb"
+>   experiment_name: "random_forest_model"
+>   steps: all
+> data:
+>   bucket: "junda-mlops"
+>   object: "dataset/training_data/"
+>   raw_data: "raw_training_data.parquet"
+>   training_data: "trainval_data.parquet"
+>   test_data: "test_data.parquet"
+>   label: "price"
+> modeling:
+>   # Name of exported model to be used in testing model
+>   test_model: "random_forest_export:latest"
+>   # Fraction of data to use for test (the remaining will be used for train and validation)
+>   test_size: 0.2
+>   # Fraction of remaining data to use for validation
+>   val_size: 0.2
+>   # Fix this for reproducibility, change to have new splits
+>   random_seed: 42
+>   # Column to use for stratification (use "none" for no stratification)
+>   stratify_by: "none"
+>   max_tfidf_features: 15
+>   # NOTE: you can put here any parameter that is accepted by the constructor of
+>   # RandomForestRegressor. This is a subsample, but more could be added:
+>   random_forest:
+>     n_estimators: 100
+>     max_depth: 12
+>     min_samples_split: 4
+>     min_samples_leaf: 3
+>     # Here -1 means all available cores
+>     n_jobs: -1
+>     criterion: mae
+>     max_features: 0.5
+>     # DO not change the following
+>     oob_score: true
+> ```
+
+### Test run
+
+Now we can run `evaluate` step. However, just for presentation purpose, let's run both `train` and `evaluate`.
+
 ```
+mlflow run . -P steps=train,evaluate
+```
+
+If we open wandb dashboard now, we can see our previous training run without test r2 and test mae. WHile our most recent run has all score recorded for test and training.
+
+![wandb screenshot](https://drive.google.com/uc?export=view&id=1WUKB5kZDA3Fxp55exCOA9nFBg2f-M9dV)
 
 ## Model retraining with hyperparameter sweep
 

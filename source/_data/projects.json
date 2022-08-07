@@ -2,7 +2,7 @@
     {
        "name":"Movie Review Sentiment Analysis",
        "url":"https://github.com/iahsanujunda/sentiment-analysis-sagemaker-pytorch/",
-       "desc":"LSTM recurrent neural network for sentiment analysis that is trained on IMDB dataset and developed using pytorch. The model is deployed on AWS sagemaker and can be invoked from AWS lambda. Public access to the model is established from React web app that will send http request to invoke the lambda function."
+       "desc":"LSTM recurrent neural network for sentiment analysis, trained on IMDB dataset, developed using pytorch, deployed on AWS sagemaker, and can be invoked from AWS lambda. Public access is established using React.js web app that will invoke the lambda function."
     },
     {
        "name":"Machine Learning on Sagemaker",
