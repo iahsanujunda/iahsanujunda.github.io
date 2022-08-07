@@ -1,7 +1,8 @@
 ---
 title: MLOps Part 3 - Evaluation and Optimization
 date: 2021-10-21 11:57:21
-tags:
+tags: mlops, machine-learning
+mathjax: true
 ---
 
 Now that we have trained a model and store it as a reusable artifact, we are ready to evaluate the model on unseen data. As with usual training practice, we are going to pull out the test portion of our split data, run this data through the trained model, and record the score we got from the test data. As a good measure, we will also re-run training process with mlflow-powered hyperparameter sweep and discover the most optimal hyperparameter that could gave us best generalization between training and testing data.
@@ -465,7 +466,7 @@ Now that we can call `evaluate` from `main` entry point, we just need to add con
 >   label: "price"
 > modeling:
 >   # Name of exported model to be used in testing model
->   test_model: "random_forest_export:latest"
+>   test_model: "random_forest_model:latest"
 >   # Fraction of data to use for test (the remaining will be used for train and validation)
 >   test_size: 0.2
 >   # Fraction of remaining data to use for validation
@@ -518,14 +519,42 @@ This execution will run for a while because there are 2x3x3=18 combination of hy
 
 ![wandb sweep](https://drive.google.com/uc?export=view&id=1pXGQt1VMu6b8uMs3Y0xfOSuQ0ROU4laL)
 
+Now that we have sweep across training run, we can check which run results in best **training** performance. Actually, let's get top 3 and note down their model version.
+
+![model 1](https://drive.google.com/uc?export=view&id=1BcZet0aZFdOaDgCGy385RG7j9ZwI2qrs)
+
+![model 2](https://drive.google.com/uc?export=view&id=1bvvNk39nZ74ZrxGrhC44CbG13yLryUqy)
+
+![model 3](https://drive.google.com/uc?export=view&id=11wbp_dUyZUiHGScY5GkFP0sWaj-NZayW)
+
+Above screenshot show top three model with best **training** performance. Model version `v18`, `v7`, and `v8` with score of $R^{2}$ 0.239, 0.237, and 0.233 respectively.
+
+Because we care more about how our model perform on data not seen on training, let's run testing step with these three models. We can use hydra sweep again.
+
+```shell
+mlflow run . \
+-P steps=evaluate \
+-P hydra_options="modeling.test_model=random_forest_model:v18,random_forest_model:v7,random_forest_model:v8 -m"
+```
+
+Wait until the run finish sweep on three models.
+
 ## Prepare model for deployment
 
-### Persists optimal hyperparameter into `config.yaml`
-
-Now that we have sweep across training run, we can check which run results in best **training** performance. Actually, let's get top 3 and note down their model version
-
-### Add training data distribution into run summary
-
 ### Give the optimal model a custom tag
+
+Once sweeping run finish on `evaluate` step, check wandb dashboard again, and check which run gave the best **testing** performance. Click on the run name, and click again on the artifact name.
+
+![wandb run list](https://drive.google.com/uc?export=view&id=1Cqv2Uzt8Srp-i9dTHR8Lq6jxA__YaMfq)
+
+![wandb run list](https://drive.google.com/uc?export=view&id=1T3umZFxiGYo6LnSjNTOiqlbMrmHdfRAm)
+
+From here, look for the model name, and click on it. On the model page, give a new custom tag called `staging`. Any consuming systems should always get this `staging` model. Eventually we are also going to give a `prod` tag. But every model that wants to be `prod` should become `staging` first.
+
+![wandb run list](https://drive.google.com/uc?export=view&id=1ndvWMeNmwfbRIz4TUVC6sSzfFMboG6hL)
+
+![wandb run list](https://drive.google.com/uc?export=view&id=1FKMrCMYCjzjQ0uKRCXH1zTLEgpDLzwVk)
+
+<!-- ### Add training data distribution into run summary -->
 
 

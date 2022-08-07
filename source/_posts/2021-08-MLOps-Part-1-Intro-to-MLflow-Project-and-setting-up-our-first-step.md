@@ -1,7 +1,7 @@
 ---
 title: MLOps Part 1 - Intro to MLflow Project and Setting-up Our First Component
 date: 2021-08-02 21:49:38
-tags:
+tags: mlops, machine-learning
 ---
  
 MLflow is a very nice tool to handle our MLOps needs. It covers several important features for doing MLOps, namely tracking server, model registry, and source code packaging. Here we are going to focus on [MLFlow Projects](https://mlflow.org/docs/latest/projects.html), the source code packaging feature that can help us develop a reproducible machine learning pipeline.

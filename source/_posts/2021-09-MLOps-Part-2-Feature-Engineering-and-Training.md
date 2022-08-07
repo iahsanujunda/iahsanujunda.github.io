@@ -1,7 +1,7 @@
 ---
 title: MLOps Part 2 - Feature Engineering and Training
 date: 2021-09-14 23:00:18
-tags:
+tags: mlops, machine-learning
 ---
  
 Previously, we have set up the main skeleton of our training pipeline using mlflow project and implemented a `download` step component. Now let's continue building the training pipeline.
