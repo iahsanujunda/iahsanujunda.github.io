@@ -504,4 +504,28 @@ If we open wandb dashboard now, we can see our previous training run without tes
 
 ## Model retraining with hyperparameter sweep
 
-## Adding in distribution into summary
+Now that we have finish our pipeline to run end-to-end training, now it is time for us to discover the best hyperparameter to use with our model. Our usage of `hydra` for configuration management really stand out here. Every entry in our `config.yaml` can easily be overriden from CLI, and we can also pass multiple values to be sweeped. Each combination of value we passed to sweep will be recorder on wandb so we can decide which model works best.
+
+To sweep along multiple hyperparameter values, run this command.
+
+```shell
+mlflow run . \
+-P steps=train \
+-P hydra_options="modeling.random_seed=42,122 modeling.random_forest.max_depth=11,12,13 modeling.random_forest.min_samples_split=3,4,5 -m"
+```
+
+This execution will run for a while because there are 2x3x3=18 combination of hyper parameters to be sweeped. As we wait for the hyperparameter sweep to finish, we can cheeck the wandb dashboard to see which combination has been executed and their respective training scores.
+
+![wandb sweep](https://drive.google.com/uc?export=view&id=1pXGQt1VMu6b8uMs3Y0xfOSuQ0ROU4laL)
+
+## Prepare model for deployment
+
+### Persists optimal hyperparameter into `config.yaml`
+
+Now that we have sweep across training run, we can check which run results in best **training** performance. Actually, let's get top 3 and note down their model version
+
+### Add training data distribution into run summary
+
+### Give the optimal model a custom tag
+
+
