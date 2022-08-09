@@ -13,7 +13,7 @@ When I want to brew something for both me and my wife, I usually go with a moka 
  
 ![a moka pot](https://drive.google.com/uc?export=view&id=1jvFRi9RrL2jQ9WPFh4QHgsN8fS3R1KBq)
  
-With the moka pot, there are much less moving parts that I need to manually control, so it is easier to make a consistent coffee. I just have to use a standard set of configurations that both of us mostly enjoy. But a problem arose when one day I changed one configuration, a smaller grind size, in order to have a stronger cup. When I first made it, it was okay, the cup is indeed a bit more bitter but also more flavorful. But when my wife makes it with the new configuration, it results in a coffee that has barely any foam and it is not as bitter as it should. At first I discarded it as her mistaking a different config, but then I also managed to get a similar result with hers, albeit rarely.
+With the moka pot, there are much less moving parts that I need to manually control, so it is easier to make a consistent coffee. I just have to use a standard set of configurations that both of us mostly enjoy. But a problem arose when one day I changed one configuration, a smaller grind size, in an attempt to have a stronger cup. When I first made it, it was okay, the cup is indeed a bit more bitter but also more flavorful. But when my wife makes it with the new configuration, it results in a coffee that has barely any foam and it is not as bitter as it should. At first I discarded it as her mistaking a different config, but then I also managed to get a similar result with hers, albeit rarely.
  
 This piqued my curiosity. Does the finer grind make a more inconsistent brew? If so, how should I debug this.
  
