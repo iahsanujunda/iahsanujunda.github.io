@@ -1,7 +1,7 @@
 ---
 title: Create Florence Nightingale's Coxcomb Diagram with Python
 date: 2022-08-09 21:26:04
-tags: data-visualization
+tags: data-visualization,python
 ---
 
 ![Nightingale Coxcomb](https://drive.google.com/uc?export=view&id=1SC6wFmma_vObK9ABNvUkxF8TO7AogFVJ)
