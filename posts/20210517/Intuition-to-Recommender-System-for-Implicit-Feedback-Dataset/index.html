@@ -16,7 +16,7 @@
 <meta property="og:image" content="https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/matrix-R.png">
 <meta property="og:image" content="https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/R-SVD.png">
 <meta property="article:published_time" content="2021-05-17T13:59:40.000Z">
-<meta property="article:modified_time" content="2022-08-09T05:16:51.016Z">
+<meta property="article:modified_time" content="2022-08-09T06:29:09.721Z">
 <meta property="article:author" content="Izzuddin Ahsanujunda">
 <meta property="article:tag" content="data science, data analysis, machine learning, software development, data engineering">
 <meta name="twitter:card" content="summary">
@@ -209,6 +209,7 @@ $$
 
 <p>With $\hat{r}_{ui}$ is the recommendation value to give for a particular user and item.</p>
 <p>Ideally, when we know the value $r_{ui}$ , we want $\hat{r}_{ui}$ to be as close as possible to $r_{ui}$. The interesting part is where we don’t know the actual value of $r_{ui}$ seeing as our $R$ is sparse. If original $r_{ui}$ is empty, but $\hat{r}_{ui}$ return non-empty value, this is the potential recommendation that we discover from our latent factors. With this logic, when we want to recommend items to user $u$, we can dot product all $y_{i}$ to a constant $x_{u}$ to get all $\hat{r}_{ui}$ for this particular user. We can then sort all items based on the resulting $\hat{r}_{ui}$. The top $\hat{r}_{ui}$ is the ones we could recommend to the user.</p>
+<p>Thank you very much for reading!</p>
 
   </div>
 </article>
