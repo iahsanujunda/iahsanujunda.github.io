@@ -41,6 +41,8 @@ We had information about `p` but not the rest. To collect those is the main reas
 
 I shot for consistently not dying in 4 minutes, if she didn't do waterfowl dance within those 4 minutes then it is counted towards `x`. The reason I choose 4 minutes is also the result of looking up online. Beating Malenia is quite a big deal especially during early days of Elden Ring release, so people have been posting their win over her. I study the approximate average time needed to beat Malenia from those clips. One channel owned by youtuber [KleinTsuboi](https://www.youtube.com/channel/UCDUpJh1Ek3plo34sGriwe-w) has been especially helpful, as they post hours and hours worth of samples. KleinTsuboi themself is a legend among Elden Ring community due to their character aptly named "Let Me Solo Her" has helped thousands of struggling tarnished in fighting -and winning- against Malenia alone.  
 
+I record some of my sample collection run against Malenia on instagram. If you fancy watching me getting floored, [check this out](https://www.instagram.com/stories/highlights/18046330489350533/).
+
 Once I managed to consistently stayed alive for 4 minutes, I collect the sample and observed that Malenia skip waterfowl dance once in 29 fights.
 
 To run the binomial test, I simply use the `scipy.stats.binom_test` function.
