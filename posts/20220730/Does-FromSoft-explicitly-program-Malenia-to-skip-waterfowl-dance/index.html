@@ -15,7 +15,7 @@
 <meta property="og:locale" content="en_US">
 <meta property="og:image" content="https://drive.google.com/uc?export=view&id=1eQ19-fYDcE3c-I8yAIq-miamsUwmN49c">
 <meta property="article:published_time" content="2022-07-30T14:05:32.000Z">
-<meta property="article:modified_time" content="2022-08-09T06:29:09.721Z">
+<meta property="article:modified_time" content="2022-08-09T08:46:13.853Z">
 <meta property="article:author" content="Izzuddin Ahsanujunda">
 <meta property="article:tag" content="statistics">
 <meta name="twitter:card" content="summary">
@@ -191,6 +191,7 @@ $H_{0}: \pi = 0.01$
 </ul>
 <p>We had information about <code>p</code> but not the rest. To collect those is the main reason I fight Malenia the second time. I trained until I managed to dodge almost all her attacks and stayed alive consistently long enough to see if she would do a waterfowl dance.</p>
 <p>I shot for consistently not dying in 4 minutes, if she didn’t do waterfowl dance within those 4 minutes then it is counted towards <code>x</code>. The reason I choose 4 minutes is also the result of looking up online. Beating Malenia is quite a big deal especially during early days of Elden Ring release, so people have been posting their win over her. I study the approximate average time needed to beat Malenia from those clips. One channel owned by youtuber <a target="_blank" rel="noopener" href="https://www.youtube.com/channel/UCDUpJh1Ek3plo34sGriwe-w">KleinTsuboi</a> has been especially helpful, as they post hours and hours worth of samples. KleinTsuboi themself is a legend among Elden Ring community due to their character aptly named “Let Me Solo Her” has helped thousands of struggling tarnished in fighting -and winning- against Malenia alone.  </p>
+<p>I record some of my sample collection run against Malenia on instagram. If you fancy watching me getting floored, <a target="_blank" rel="noopener" href="https://www.instagram.com/stories/highlights/18046330489350533/">check this out</a>.</p>
 <p>Once I managed to consistently stayed alive for 4 minutes, I collect the sample and observed that Malenia skip waterfowl dance once in 29 fights.</p>
 <p>To run the binomial test, I simply use the <code>scipy.stats.binom_test</code> function.</p>
 <figure class="highlight plaintext"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">p_val = scipy.stats.binom_test(x=1, n=29, p=0.01, alternative=&#x27;greater&#x27;)</span><br></pre></td></tr></table></figure>
