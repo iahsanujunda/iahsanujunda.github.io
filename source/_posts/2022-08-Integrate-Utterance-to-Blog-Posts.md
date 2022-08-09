@@ -6,13 +6,13 @@ tags:
 
 [Utterance](https://utteranc.es/) is a comment widget that leverage github issues to bring discussion to our blog. I have been looking for a discussion tool for a while now, but none seems suitable. Lots of hexo-powered blogs use disqus for discussion, however I felt overwhelmed with the many configuration of disqus. The appearance is very cluttered as well. I just need a simple discussion widget that will let user identify themselves before commenting, but hexo as a static page generator doesn't make use any kind of database storage so authenticating would need to be taken care of by third party.
 
-Come utterance, that comes to my attention when using this [cactus theme](https://github.com/probberechts/hexo-theme-cactus), and once I read the documentation, I am immediately sold. Utterance make use of github Oauth to authenticate users, it store comments as issues, and to integrate utterance to our site, we just need to add the following script to our html.
+Come utterance, brought to my attention when using this [cactus theme](https://github.com/probberechts/hexo-theme-cactus). Once I read the documentation, I am immediately sold. Utterance make use of github Oauth to authenticate users, it store comments as github repo issues, and to integrate utterance to our site, we just need to add the following script to our html.
 
 ```html
 <script src="https://utteranc.es/client.js"
-        repo="[ENTER REPO HERE]"
+        repo="iahsanujunda/iahsanujunda.github.io"
         issue-term="pathname"
-        theme="github-light"
+        theme="github-dark"
         crossorigin="anonymous"
         async>
 </script>
