@@ -80,3 +80,5 @@ $$
 With $\hat{r}\_{ui}$ is the recommendation value to give for a particular user and item.
 
 Ideally, when we know the value $r\_{ui}$ , we want $\hat{r}\_{ui}$ to be as close as possible to $r\_{ui}$. The interesting part is where we don't know the actual value of $r\_{ui}$ seeing as our $R$ is sparse. If original $r\_{ui}$ is empty, but $\hat{r}\_{ui}$ return non-empty value, this is the potential recommendation that we discover from our latent factors. With this logic, when we want to recommend items to user $u$, we can dot product all $y_{i}$ to a constant $x_{u}$ to get all $\hat{r}\_{ui}$ for this particular user. We can then sort all items based on the resulting $\hat{r}_{ui}$. The top $\hat{r}\_{ui}$ is the ones we could recommend to the user.
+
+Thank you very much for reading!

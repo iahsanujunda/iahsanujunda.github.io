@@ -570,3 +570,5 @@ mlflow will create a new virtual environment, and run the first step `download` 
 We can see that our dataset has now been logged in wandb and can be used for subsequent steps.
 
 The state of our source code can also be checked from [this github repository](https://github.com/iahsanujunda/nyc_airbnb_pipeline) on branch named `part-1`.
+
+Thanks for reading!

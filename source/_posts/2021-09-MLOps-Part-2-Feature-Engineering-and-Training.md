@@ -869,3 +869,5 @@ If we look at wandb.ai run summary, we are going to see training score of our mo
 Not only that, we can also see the hyper parameter we use to get that score, the datasets we consume, and their respective version. This is going to be very useful when we want to do offline evaluation of our model.
 
 The progress up to this point can be accessed from the [accompanying repository](https://github.com/iahsanujunda/nyc_airbnb_pipeline) on `part-2` branch.
+
+Hope by this point we have better understanding on how to implement reproducible training pipeline. Thanks for reading!

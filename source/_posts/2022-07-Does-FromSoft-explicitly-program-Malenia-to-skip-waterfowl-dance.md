@@ -70,3 +70,5 @@ Type I could appear when we fight Malenia three times, got her to skip waterfowl
 Type II error appear when we use inappropriate assumption. For example, it is perfectly possible that FromSoft intentionally make Malenia skip waterfowl dance in exactly `0.01` probability. Which means our hypothesis is wrong in the first place.
 
 Power analysis shows probability of seeing an effect if there is an effect to observe. Information needed to run power analysis includes effect size and number of trials. We can switch the context of power analysis, if we want to have fixed probability of seeing an effect, we can calculate number of trials to run to get this probability. Doing too few trials and we might fail to observe effect we want to see, and doing too many trials will not contribute much to the final conclusion. 
+
+I say it's enough reading, now go beat some sense into Malenia!

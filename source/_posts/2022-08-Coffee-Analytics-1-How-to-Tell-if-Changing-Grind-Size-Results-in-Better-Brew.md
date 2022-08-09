@@ -87,7 +87,9 @@ We got a very high p value that tells us that if the probability of getting high
 Preparing for this experiment has given me a better understanding of coffee-brewing. As I collect info and data, I realised some of my initial understanding is flawed, therefore I have to repeat this experiment with improved factors, constants, variables, and treatments. In the next experiment, I could put my coffee bean in individual zipper bags when it was first bought. I currently put my coffee beans in the bag I bought them in. When I do this, the beans that are used in later batches are exposed more to the air, and therefore lose more of their CO2 and other coffee goodness. This might be what hinders our observation.  If I put them in separate bags that contain only enough for one serving, I can keep the bean in a vacuum longer and only expose them to air once I am about to grind them.
  
 As a fun exercise, I ran the same analysis to see the effect of `fire_level` and `crema_level`, the intuition is that `fire_level` affects how fast water vapour seeps through the coffee bed. Finer grind setting might not be overcooked if the cooking time is fast. The result is surprisingly the same, p value is `1.0`.
- 
+
+Thanks for reading!
+
 ## Reference
  
 [1] https://coffeeaffection.com/coffee-in-freezer/
