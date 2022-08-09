@@ -5,6 +5,8 @@ tags:
 mathjax: true
 ---
  
+ > TL;DR the smaller grind size behaves pretty much the same with larger grind size. There might be other more important factor at play, or there are too little observation to make a confident conclusion.
+
 It's now been two years since I seriously started making my own coffee. COVID-19 pandemic really brings out my inner barista. Before the pandemic and the ensuing restriction hits, I always buy my coffee. But now I weigh my coffee, hand grind beans right before brewing, 3D print custom tools to help me brew better, and watched [James Hoffmann](https://www.youtube.com/channel/UCMb0O2CdPBNi-QqPk5T3gsQ) videos to know the latest poison to buy.
  
 When I want to brew something for both me and my wife, I usually go with a moka pot, because it is one that both of us will always enjoy. I can brew v60 but my wife does not always like the taste of v60 coffee, because my v60 brewing is inconsistent. V60 is a brewer that requires dedication. There are a lot more factors that are involved in making v60 coffee compared to moka pot, so it is really easy to introduce unintended factors into my v60 brewing.
