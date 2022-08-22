@@ -19,7 +19,7 @@ We're gonna finish the `evaluate` part or our pipeline. Let's go!
 
 We need to add new function to our `BaseRunner` class. Open `nyc_airbnb/utils/base_model.py` and add the following changes.
 
-> ./nyc_airbnb/utils/base_model.py
+> ./nyc_airbnb/utils/base_runner.py
 > 
 > ```python
 > import wandb
