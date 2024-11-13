@@ -7,7 +7,7 @@ mathjax: true
 
 Hidetaka Miyazaki and Fromsoft has a portfolio of hard and challenging bosses in their games. However, in their latest game Elden Ring, one particular boss has been making a scene online, so much so that videos of her have popped up on my Youtube recommendation before I even purchase the game. She heals with every connecting hit, her move set is unforgiving, she attacks as soon as we try to heal, and one particular move of her is near-impossible to dodge or block. The only way to avoid this attack is to `git gud`!
 
-![malenia](https://drive.google.com/uc?export=view&id=1eQ19-fYDcE3c-I8yAIq-miamsUwmN49c)
+![Waterfowl Dance](/images/2022-07-Does-FromSoft-explicitly-program-Malenia-to-skip-waterfowl-dance/waterfowl-dance.gif)
 
 This boss is called Malenia. Her and that one particular move, called waterfowl dance, gave PTSD to a lot of people. I would recommend you to search for clips of people fighting Malenia to actually see how formidable she is, but you can watch [this video](https://youtu.be/A-1WrCdd6TY?t=285) on youtube that is quite hilarious. You can even recognised waterfowl dance immediately.
 
