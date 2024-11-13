@@ -1,5 +1,5 @@
 ---
-title: Collecting and Managing your Data
+title: Understanding the Data - Exploring CO2 Emissions, Internet Usage, GDP per Capita, and Oil Consumption between Countries
 date: 2020-06-07 09:45:28
 tags:
 ---

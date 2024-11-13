@@ -18,25 +18,25 @@ Answering my question requires a solid data that come from a reputable source. I
 
 Gapminder has one data that listed CO2 emission of each countries, this is going to be our main variable.
 
-![gapminder co2 total](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_co2_emission.png)
+![gapminder co2 total](/images/2020-06-Starting-Analytics-Project/co2-emission.png)
 
 It also has data of % of population who is using the internet. This is going to be used as our secondary variable.
 
-![gapmnder internet user rate](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_internetuse_rate.png)
+![gapmnder internet user rate](/images/2020-06-Starting-Analytics-Project/internet-use-rate.png)
 
 The simplest form of analytical question is looking for association. One study by [Salahuddin, Alam, and Ozturk (2016)](https://www.sciencedirect.com/science/article/abs/pii/S1364032116300351) suggested that the association between CO2 emission and internet user rate is a positive correlation among OECD countries. Although they stated that the rapid growth of the internet is not an environmental threat. It quoted other studies that suggested that internet usage growth increases electricity consumption - a known contributor of CO2 emission.
 
 Reading this, I plan to introduce economic level as the next secondary variable. It is a good variable to check if we can control for the effect of wealth. If high economic activity consistently associated with higher emission, it means we can disentagle the effect of digitalization from general economic activities. We can use Gapminder GDP percapita as a proxy metric for economic level.
 
-![gapminder gdp per capita](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_gdp_capita.png)
+![gapminder gdp per capita](/images/2020-06-Starting-Analytics-Project/gdp-capita.png)
 
 To complement this variable, we are going to pull total population as well, in case we need to refer to the number of population instead of the ratio.
 
-![gapminder total population](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_total_population.png) 
+![gapminder total population](/images/2020-06-Starting-Analytics-Project/total-population.png) 
 
 Previously mentioning electricity consumption lead me to also include oil consumption to provide insight into energy source of the digitalization. This can add nuance to the analysis that shows if a country can grow with internet with minimal impact to environment by embracing non-oil energy sources.
 
-![gapminder oil percapita](https://iahsanujunda-hosted-files.s3.us-east-2.amazonaws.com/images/gapminder_oil_percapita.png)
+![gapminder oil consumption](/images/2020-06-Starting-Analytics-Project/oil-consumption.png)
 
 ## The Analysis
 
@@ -44,6 +44,6 @@ For the next articles in this series, I am going to do data exploring and prepro
 
 The next step is, of course, to try to find the association between variables. I will try to introduce the statistical method to measure the association, show the calculated statistics, and try to describe what the calculation implied. WIth any statistics, careful caveats need to be taken into account, and I wil try to include this as much as possible.
 
-Once we are popwered by statistical association, we can try to get a closer look to how different countries compare in emission and internet usage. Some segmentation might be needed to discover pattern, if a pattern is there to be discovered. We might also be able to give spotlight on outliers and dig deeper on why those countries is outliers.
+Once we are powered by statistical association, we can try to get a closer look to how different countries compare in emission and internet usage. Some segmentation might be needed to discover pattern, if a pattern is there to be discovered. We might also be able to give spotlight on outliers and dig deeper on why those countries is outliers.
 
 And lastly, I will try to incomporated everything into reflections of what we have learned.
