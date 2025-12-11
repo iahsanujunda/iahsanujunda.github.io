@@ -21,15 +21,24 @@ nav:
 
 
 # Links to your social media accounts.
-# The keys should correspond to Fontawesome icon names
+# The 'icon' keys should correspond to Fontawesome icon names
 # (see https://fontawesome.com/icons?d=gallery&s=brands);
 # only 'mail' is an exception.
+# You can optionally add a 'label' key to set the title attribute on the link. 
+# 'icon' value will be used as title when 'label' is missing.
 social_links:
-  github: http://github.com/iahsanujunda
-  twitter: /
-  facebook: /
-  linkedin: https://www.linkedin.com/in/izzuddinahsanujunda
-  mail: mailto:izzuddin.ahsanujunda@gmail.com
+  -
+    icon: github
+    link: http://github.com/iahsanujunda
+  -
+    icon: twitter
+    link: /
+  -
+    icon: facebook
+    link: /
+  -
+    icon: mail
+    link: mailto:izzuddin.ahsanujunda@gmail.com
 
 # Customize the overview with displaying a tagcloud on the index page.
 # Options: https://hexo.io/docs/helpers.html#tagcloud
@@ -64,6 +73,15 @@ post:
 copyright:
   start_year: 2020
   end_year:
+
+# Customize the 404 page
+# Options:
+#   - enabled: whether to enable the 404 page (404.html).
+error_404:
+  enabled: true
+  title: "404 Page Not Found"
+  description: "The page you are looking for might have been removed, had its name changed, or is temporarily unavailable."
+
 
 ##############################################################################
 # Look and Feel
