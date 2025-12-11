@@ -31,12 +31,6 @@ social_links:
     icon: github
     link: http://github.com/iahsanujunda
   -
-    icon: twitter
-    link: /
-  -
-    icon: facebook
-    link: /
-  -
     icon: mail
     link: mailto:izzuddin.ahsanujunda@gmail.com
 
@@ -99,7 +93,7 @@ logo:
   enabled: true
   width: 50
   height: 50
-  url: /images/darkicon.png
+  url: /images/logo.png
   gravatar: false
   grayout: true
 
